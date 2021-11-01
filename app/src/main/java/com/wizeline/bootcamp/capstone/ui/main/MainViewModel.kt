@@ -23,7 +23,7 @@ class MainViewModel : ViewModel() {
     fun loadTickerData() {
         viewModelScope.launch {
             val repo:TickerRepo = TickerRepo()
-            val response = repo.getTickerService("ltc_usd").body()
+            val response = repo.getTickerByBook("ltc_usd").body()
 
             val payload = response!!.payload
 
