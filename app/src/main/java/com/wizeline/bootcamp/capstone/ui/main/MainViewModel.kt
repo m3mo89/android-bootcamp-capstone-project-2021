@@ -9,7 +9,7 @@ class MainViewModel : ViewModel() {
     fun loadData() {
         viewModelScope.launch {
             val repo:AvailableBooksRepo = AvailableBooksRepo()
-            val response = repo.getAvailableBookService().body()
+            val response = repo.getAvailableBooks().body()
 
             val payload = response!!.payload
 

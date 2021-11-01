@@ -4,8 +4,8 @@ import com.wizeline.bootcamp.capstone.data.services.AvailableBooksService
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
 
 class AvailableBooksRepo {
-    suspend fun getAvailableBookService() = NetworkingModule
+    suspend fun getAvailableBooks() = NetworkingModule
             .provideRetrofitClient()
             .create(AvailableBooksService::class.java)
-            .getAvailableBooksService()
+            .getAvailableBooks()
 }
