@@ -29,6 +29,7 @@ class MainFragment : Fragment() {
         // Use the ViewModel
         viewModel.loadData()
         viewModel.loadTickerData()
+        viewModel.loadOrderBookData()
     }
 
 }
