@@ -28,6 +28,7 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         // Use the ViewModel
         viewModel.loadData()
+        viewModel.loadTickerData()
     }
 
 }
