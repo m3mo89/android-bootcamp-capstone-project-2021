@@ -10,13 +10,15 @@ data class OrderBookResponse (
 data class Asks (
     @SerializedName("book") var book : String,
     @SerializedName("price") var price : String,
-    @SerializedName("amount") var amount : String
+    @SerializedName("amount") var amount : String,
+    @SerializedName("oid") var oid : String
 )
 
 data class Bids (
     @SerializedName("book") var book : String,
     @SerializedName("price") var price : String,
-    @SerializedName("amount") var amount : String
+    @SerializedName("amount") var amount : String,
+    @SerializedName("oid") var oid : String
 )
 
 data class OrderBook (
