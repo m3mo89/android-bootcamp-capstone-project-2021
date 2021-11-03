@@ -11,11 +11,12 @@ class MainViewModel : ViewModel() {
     fun loadData() {
         viewModelScope.launch {
             val repo:AvailableBooksRepo = AvailableBooksRepo()
+
             val response = repo.getAvailableBooks().body()
 
-            val payload = response!!.payload
+            val payload = response?.payload
 
-            payload.forEach {
+            payload?.forEach {
                 println("Book: ${it.book}")
             }
         }
@@ -26,9 +27,9 @@ class MainViewModel : ViewModel() {
             val repo:TickerRepo = TickerRepo()
             val response = repo.getTickerByBook("ltc_usd").body()
 
-            val payload = response!!.payload
+            val payload = response?.payload
 
-            println("Book: ${payload.book} Volume: ${payload.volume}")
+            println("Book: ${payload?.book} Volume: ${payload?.volume}")
         }
     }
 
@@ -37,21 +38,21 @@ class MainViewModel : ViewModel() {
             val repo: OrderBookRepo = OrderBookRepo()
             val response = repo.getOrderBookByBookAndAggregate("ltc_usd", true).body()
 
-            val payload = response!!.payload
+            val payload = response?.payload
 
             println("Asks")
 
-            payload.asks.forEach{
+            payload?.asks?.forEach{
                 println("Book: ${it.book} Price: ${it.price}")
             }
 
             println("Bids")
 
-            payload.bids.forEach{
+            payload?.bids?.forEach{
                 println("Book: ${it.book} Price: ${it.price}")
             }
 
-            println("UpdateAt: ${payload.updatedAt} Sequence: ${payload.sequence}")
+            println("UpdateAt: ${payload?.updatedAt} Sequence: ${payload?.sequence}")
         }
     }
 }

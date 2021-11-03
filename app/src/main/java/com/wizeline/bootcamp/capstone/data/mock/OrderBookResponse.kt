@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class OrderBookResponse (
     var success : Boolean,
-    var payload : OrderBook
+    var payload : OrderBook?
 )
 
 data class Asks (

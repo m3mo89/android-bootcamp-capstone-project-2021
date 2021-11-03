@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class TickerResponse (
     var success : Boolean,
-    var payload : Ticker
+    var payload : Ticker?
 )
 
 data class Ticker (
