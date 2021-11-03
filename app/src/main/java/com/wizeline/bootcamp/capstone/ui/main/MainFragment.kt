@@ -26,8 +26,13 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // Use the ViewModel
-        viewModel.loadData()
+
+        requestData()
+    }
+
+    fun requestData()
+    {
+        viewModel.loadAvailableBooksData()
         viewModel.loadTickerData()
         viewModel.loadOrderBookData()
     }

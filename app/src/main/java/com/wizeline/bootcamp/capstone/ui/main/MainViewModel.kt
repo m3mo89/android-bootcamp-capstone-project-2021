@@ -8,7 +8,7 @@ import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
-    fun loadData() {
+    fun loadAvailableBooksData() {
         viewModelScope.launch {
             val repo:AvailableBooksRepo = AvailableBooksRepo()
 
