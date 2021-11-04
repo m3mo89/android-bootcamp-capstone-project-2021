@@ -44,26 +44,17 @@ class BookDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        askListAdapter = AskListAdapter()
-        bidListAdapter = BidListAdapter()
+        setupAdapters()
+        bindTickerValues()
+    }
 
-        binding.askDetailsList.run {
-            adapter = askListAdapter
-            layoutManager = object : LinearLayoutManager(requireContext(), HORIZONTAL, false){
+    private fun setupAdapters() {
+        setupAskListAdapter()
+        setupBidListAdapter()
+    }
 
-            }
-        }
-
-        binding.bidDetailsList.run {
-            adapter = bidListAdapter
-            layoutManager = object : LinearLayoutManager(requireContext(), HORIZONTAL, false){
-
-            }
-        }
-
-        askListAdapter.submitList(mockAsks)
-        bidListAdapter.submitList(mockBids)
-
+    private fun bindTickerValues()
+    {
         binding.book.text = mockTicker.id
         binding.cryptoName.text = mockTicker.cryptoName
         binding.bookPrice.text = mockTicker.lastPrice
@@ -73,4 +64,27 @@ class BookDetailsFragment : Fragment() {
         Glide.with(binding.root).load(mockTicker.spriteUrl).into(binding.bookSpriteUrl)
     }
 
+    private fun setupAskListAdapter() {
+        askListAdapter = AskListAdapter()
+
+        binding.askDetailsList.run {
+            adapter = askListAdapter
+            layoutManager = object : LinearLayoutManager(requireContext(), HORIZONTAL, false){
+            }
+        }
+
+        askListAdapter.submitList(mockAsks)
+    }
+
+    private fun setupBidListAdapter() {
+        bidListAdapter = BidListAdapter()
+
+        binding.bidDetailsList.run {
+            adapter = bidListAdapter
+            layoutManager = object : LinearLayoutManager(requireContext(), HORIZONTAL, false){
+            }
+        }
+
+        bidListAdapter.submitList(mockBids)
+    }
 }
