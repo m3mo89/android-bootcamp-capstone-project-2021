@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/bookListFragment"
         android:name="com.wizeline.bootcamp.capstone.ui.booklist.BookListFragment"
-        android:label="BookListFragment" >
+        android:label="Book List" >
         <action
             android:id="@+id/toBookDetailsFragment"
             app:destination="@id/bookDetailsFragment"
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/bookDetailsFragment"
         android:name="com.wizeline.bootcamp.capstone.ui.bookdetails.BookDetailsFragment"
-        android:label="BookDetailsFragment" >
+        android:label="Book Details" >
         <argument
             android:name="book_id"
             app:argType="string" />
