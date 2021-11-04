@@ -129,12 +129,49 @@
         app:layout_constraintTop_toBottomOf="@id/ask_price_value"
         app:layout_constraintVertical_bias="0"
         android:text="Buy Orders" />
+    <LinearLayout
+        android:id="@+id/ask_details_list_header"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buy_orders"
+        app:layout_constraintVertical_bias="0">
+        <TextView
+            android:id="@+id/ask_price_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price "
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/ask_amount_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount "
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/ask_total_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Total"
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"/>
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ask_details_list"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ask_details_list_header"
         app:layout_constraintTop_toBottomOf="@id/buy_orders"
         tools:listitem="@layout/item_ask" />
     <TextView
@@ -150,12 +187,49 @@
         app:layout_constraintTop_toBottomOf="@id/ask_details_list"
         app:layout_constraintVertical_bias="0"
         android:text="Sell Orders" />
+    <LinearLayout
+        android:id="@+id/bid_details_list_header"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sell_orders"
+        app:layout_constraintVertical_bias="0">
+        <TextView
+            android:id="@+id/bid_price_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price "
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/bid_amount_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount "
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/bid_total_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Total "
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"/>
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bid_details_list"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ask_details_list_header"
         app:layout_constraintTop_toBottomOf="@id/sell_orders"
         tools:listitem="@layout/item_ask" />
 </androidx.constraintlayout.widget.ConstraintLayout>
