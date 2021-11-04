@@ -30,9 +30,9 @@ class BookListAdapter (
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(book: Book) {
-            binding.textViewId.text = book.id.toString()
-            binding.textViewName.text = book.name
-            Glide.with(binding.root).load(book.spriteUrl).into(binding.imageViewSprite)
+            binding.bookId.text = book.id.toString()
+            binding.bookName.text = book.name
+            Glide.with(binding.root).load(book.spriteUrl).into(binding.bookSpriteUrl)
 
             binding.root.setOnClickListener()
             {
