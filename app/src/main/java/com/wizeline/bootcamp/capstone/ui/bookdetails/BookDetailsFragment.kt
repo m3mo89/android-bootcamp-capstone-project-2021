@@ -44,13 +44,13 @@ class BookDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupAdapters()
+        configAdapters()
         bindTickerValues()
     }
 
-    private fun setupAdapters() {
-        setupAskListAdapter()
-        setupBidListAdapter()
+    private fun configAdapters() {
+        configAskListAdapter()
+        configBidListAdapter()
     }
 
     private fun bindTickerValues()
@@ -64,7 +64,7 @@ class BookDetailsFragment : Fragment() {
         Glide.with(binding.root).load(mockTicker.spriteUrl).into(binding.bookSpriteUrl)
     }
 
-    private fun setupAskListAdapter() {
+    private fun configAskListAdapter() {
         askListAdapter = AskListAdapter()
 
         binding.askDetailsList.run {
@@ -76,7 +76,7 @@ class BookDetailsFragment : Fragment() {
         askListAdapter.submitList(mockAsks)
     }
 
-    private fun setupBidListAdapter() {
+    private fun configBidListAdapter() {
         bidListAdapter = BidListAdapter()
 
         binding.bidDetailsList.run {
