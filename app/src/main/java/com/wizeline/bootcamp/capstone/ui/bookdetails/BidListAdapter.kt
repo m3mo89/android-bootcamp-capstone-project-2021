@@ -26,6 +26,7 @@ class BidListAdapter : ListAdapter<Bid, BidListAdapter.BidViewHolder>(DIFF_CALLB
         fun bind(bid: Bid) {
             binding.bidAmount.text = bid.amount
             binding.bidPrice.text = bid.price
+            binding.bidTotal.text = bid.total
         }
     }
 
