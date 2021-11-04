@@ -1,41 +1,65 @@
 package com.wizeline.bootcamp.capstone.data.mock
 
+import com.wizeline.bootcamp.capstone.domain.Ask
+import com.wizeline.bootcamp.capstone.domain.Bid
 import com.wizeline.bootcamp.capstone.domain.Book
+import com.wizeline.bootcamp.capstone.domain.Ticker
 
 val mockBooks = listOf(
-    Book(id = "btc_mxn", name = "BTC/MXN", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/btc"),
-    Book(id = "eth_btc", name = "ETH/BTC", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/eth"),
-    Book(id = "eth_mxn", name = "ETH/MXN", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/eth"),
-    Book(id = "xrp_btc", name = "XRP/BTC", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/xrp"),
-    Book(id = "xrp_mxn", name = "XRP/MXN", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/xrp"),
-    Book(id = "ltc_btc", name = "LTC/BTC", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/ltc"),
-    Book(id = "ltc_mxn", name = "LTC/MXN", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/ltc"),
-    Book(id = "bch_btc", name = "BCH/BTC", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/bch"),
-    Book(id = "bch_mxn", name = "BCH/MXN", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/bch"),
-    Book(id = "tusd_btc", name = "TUSD/BTC", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/tusd"),
-    Book(id = "tusd_mxn", name = "TUSD/MXN", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/tusd"),
-    Book(id = "mana_btc", name = "MANA/BTC", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/mana"),
-    Book(id = "mana_mxn", name = "MANA/MXN", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/mana"),
-    Book(id = "bat_btc", name = "BAT/BTC", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/bat"),
-    Book(id = "bat_mxn", name = "BAT/MXN", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/bat"),
-    Book(id = "btc_ars", name = "BTC/ARS", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/btc"),
-    Book(id = "btc_dai", name = "BTC/DAI", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/btc"),
-    Book(id = "dai_mxn", name = "DAI/MXN", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/dai"),
-    Book(id = "btc_usd", name = "BTC/USD", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/btc"),
-    Book(id = "xrp_usd", name = "XRP/USD", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/xrp"),
-    Book(id = "eth_usd", name = "ETH/USD", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/eth"),
-    Book(id = "dai_ars", name = "DAI/ARS", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/dai"),
-    Book(id = "btc_brl", name = "BTC/BRL", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/btc"),
-    Book(id = "eth_ars", name = "ETH/ARS", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/eth"),
-    Book(id = "eth_brl", name = "ETH/BRL", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/eth"),
-    Book(id = "btc_usdt", name = "BTC/USDT", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/btc"),
-    Book(id = "usd_mxn", name = "USD/MXN", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/usd"),
-    Book(id = "usd_ars", name = "USD/ARS", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/usd"),
-    Book(id = "usd_brl", name = "USD/BRL", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/usd"),
-    Book(id = "mana_usd", name = "MANA/USD", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/mana"),
-    Book(id = "ltc_usd", name = "LTC/USD", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/ltc"),
-    Book(id = "comp_usd", name = "COMP/USD", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/comp"),
-    Book(id = "link_usd", name = "LINK/USD", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/link"),
-    Book(id = "uni_usd", name = "UNI/USD", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/uni"),
-    Book(id = "aave_usd", name = "AAVE/USD", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/aave"),
+    Book(id = "btc_mxn", name = "Bitcoin to Pesos mexicanos", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/btc"),
+    Book(id = "eth_btc", name = "Ether to Bitcoin", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/eth"),
+    Book(id = "eth_mxn", name = "Ether to Pesos mexicanos", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/eth"),
+    Book(id = "xrp_btc", name = "XRP to Bitcoin", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/xrp"),
+    Book(id = "xrp_mxn", name = "XRP to Pesos mexicanos", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/xrp"),
+    Book(id = "ltc_btc", name = "Litecoin to Bitcoin", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/ltc"),
+    Book(id = "ltc_mxn", name = "Litecoin to Pesos mexicanos", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/ltc"),
+    Book(id = "bch_btc", name = "Bitcoin cash to Bitcoin", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/bch"),
+    Book(id = "bch_mxn", name = "Bitcoin cash to Pesos mexicanos", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/bch"),
+    Book(id = "tusd_btc", name = "TrueUSD to Bitcoin", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/tusd"),
+    Book(id = "tusd_mxn", name = "TrueUSD to Pesos mexicanos", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/tusd"),
+    Book(id = "mana_btc", name = "MANA to Bitcoin", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/mana"),
+    Book(id = "mana_mxn", name = "MANA to Pesos mexicanos", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/mana"),
+    Book(id = "bat_btc", name = "BAT to Bitcoin", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/bat"),
+    Book(id = "bat_mxn", name = "BAT to Pesos mexicanos", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/bat"),
+    Book(id = "btc_ars", name = "Bitcoin to Pesos argentinos", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/btc"),
+    Book(id = "btc_dai", name = "Bitcoin to Dai", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/btc"),
+    Book(id = "dai_mxn", name = "Dai to Pesos argentinos", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/dai"),
+    Book(id = "btc_usd", name = "Bitcoin to USD stablecoins", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/btc"),
+    Book(id = "ltc_usd", name = "Litecoin to USD stablecoins", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/ltc"),
+    Book(id = "comp_usd", name = "Compound to USD stablecoins", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/comp"),
+    Book(id = "link_usd", name = "Chainlink Token to USD stablecoins ", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/link"),
+    Book(id = "uni_usd", name = "Uniswap to USD stablecoins", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/uni"),
+    Book(id = "aave_usd", name = "Aave to USD stablecoins", spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/aave"),
+)
+
+val mockTicker = Ticker(
+    id="eth_brl",
+    cryptoName = "Ether",
+    lastPrice = "25,196.49",
+    lowPrice = "25,179.813", highPrice = "26,353.86",
+    ask = "25,401.53",
+    bid = "25,333.08",
+    spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/eth"
+)
+
+val mockAsks = listOf(
+    Ask(price = "0.07325251", amount = "0.00815501"),
+    Ask(price = "0.07325252", amount = "0.00815502"),
+    Ask(price = "0.07325253", amount = "0.00815503"),
+    Ask(price = "0.07325254", amount = "0.00815504"),
+    Ask(price = "0.07325251", amount = "0.00815501"),
+    Ask(price = "0.07325252", amount = "0.00815502"),
+    Ask(price = "0.07325253", amount = "0.00815503"),
+    Ask(price = "0.07325254", amount = "0.00815504"),
+)
+
+val mockBids = listOf(
+    Bid(price = "0.07325251", amount = "0.00815501"),
+    Bid(price = "0.07325252", amount = "0.00815502"),
+    Bid(price = "0.07325253", amount = "0.00815503"),
+    Bid(price = "0.07325254", amount = "0.00815504"),
+    Bid(price = "0.07325251", amount = "0.00815501"),
+    Bid(price = "0.07325252", amount = "0.00815502"),
+    Bid(price = "0.07325253", amount = "0.00815503"),
+    Bid(price = "0.07325254", amount = "0.00815504"),
 )
