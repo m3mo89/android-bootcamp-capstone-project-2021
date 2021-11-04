@@ -43,23 +43,23 @@ val mockTicker = Ticker(
 )
 
 val mockAsks = listOf(
-    Ask(price = "0.07325251", amount = "0.00815501"),
-    Ask(price = "0.07325252", amount = "0.00815502"),
-    Ask(price = "0.07325253", amount = "0.00815503"),
-    Ask(price = "0.07325254", amount = "0.00815504"),
-    Ask(price = "0.07325251", amount = "0.00815501"),
-    Ask(price = "0.07325252", amount = "0.00815502"),
-    Ask(price = "0.07325253", amount = "0.00815503"),
-    Ask(price = "0.07325254", amount = "0.00815504"),
+    Ask(price = "0.07325251", amount = "0.00815501", total ="0.00815503"),
+    Ask(price = "0.07325252", amount = "0.00815502", total ="0.00815503"),
+    Ask(price = "0.07325253", amount = "0.00815503", total ="0.00815503"),
+    Ask(price = "0.07325254", amount = "0.00815504", total ="0.00815503"),
+    Ask(price = "0.07325251", amount = "0.00815501", total ="0.00815503"),
+    Ask(price = "0.07325252", amount = "0.00815502", total ="0.00815503"),
+    Ask(price = "0.07325253", amount = "0.00815503", total ="0.00815503"),
+    Ask(price = "0.07325254", amount = "0.00815504", total ="0.00815503"),
 )
 
 val mockBids = listOf(
-    Bid(price = "0.07325251", amount = "0.00815501"),
-    Bid(price = "0.07325252", amount = "0.00815502"),
-    Bid(price = "0.07325253", amount = "0.00815503"),
-    Bid(price = "0.07325254", amount = "0.00815504"),
-    Bid(price = "0.07325251", amount = "0.00815501"),
-    Bid(price = "0.07325252", amount = "0.00815502"),
-    Bid(price = "0.07325253", amount = "0.00815503"),
-    Bid(price = "0.07325254", amount = "0.00815504"),
+    Bid(price = "0.07325251", amount = "0.00815501", total ="0.00815503"),
+    Bid(price = "0.07325252", amount = "0.00815502", total ="0.00815503"),
+    Bid(price = "0.07325253", amount = "0.00815503", total ="0.00815503"),
+    Bid(price = "0.07325254", amount = "0.00815504", total ="0.00815503"),
+    Bid(price = "0.07325251", amount = "0.00815501", total ="0.00815503"),
+    Bid(price = "0.07325252", amount = "0.00815502", total ="0.00815503"),
+    Bid(price = "0.07325253", amount = "0.00815503", total ="0.00815503"),
+    Bid(price = "0.07325254", amount = "0.00815504", total ="0.00815503"),
 )
