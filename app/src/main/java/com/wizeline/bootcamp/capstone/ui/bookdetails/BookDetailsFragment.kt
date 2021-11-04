@@ -8,13 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.wizeline.bootcamp.capstone.R
 import com.wizeline.bootcamp.capstone.data.mock.mockAsks
 import com.wizeline.bootcamp.capstone.data.mock.mockBids
 import com.wizeline.bootcamp.capstone.data.mock.mockTicker
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookDetailsBinding
-import com.wizeline.bootcamp.capstone.databinding.FragmentBookListBinding
-import com.wizeline.bootcamp.capstone.ui.booklist.BookListAdapter
 
 class BookDetailsFragment : Fragment() {
 
@@ -22,9 +19,7 @@ class BookDetailsFragment : Fragment() {
         fun newInstance() = BookDetailsFragment()
     }
 
-    private var _binding: FragmentBookDetailsBinding? = null
-    private val binding: FragmentBookDetailsBinding
-        get() = _binding!!
+    private lateinit var binding: FragmentBookDetailsBinding
 
     private lateinit var askListAdapter: AskListAdapter
 
@@ -38,7 +33,7 @@ class BookDetailsFragment : Fragment() {
     ): View? {
         return FragmentBookDetailsBinding
             .inflate(layoutInflater, container, false)
-            .apply { _binding = this }
+            .apply { binding = this }
             .root
     }
 

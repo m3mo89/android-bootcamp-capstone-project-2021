@@ -22,9 +22,7 @@ class BookListFragment : Fragment() {
         fun newInstance() = BookListFragment()
     }
 
-    private var _binding: FragmentBookListBinding? = null
-    private val binding: FragmentBookListBinding
-        get() = _binding!!
+    private lateinit var binding: FragmentBookListBinding
 
     private lateinit var navController: NavController
 
@@ -38,7 +36,7 @@ class BookListFragment : Fragment() {
     ): View? {
         return FragmentBookListBinding
             .inflate(layoutInflater, container, false)
-            .apply { _binding = this }
+            .apply { binding = this }
             .root
     }
 
