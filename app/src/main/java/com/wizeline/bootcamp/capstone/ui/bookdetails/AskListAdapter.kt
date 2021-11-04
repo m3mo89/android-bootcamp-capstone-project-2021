@@ -27,6 +27,7 @@ class AskListAdapter : ListAdapter<Ask, AskListAdapter.AskViewHolder>(DIFF_CALLB
         fun bind(ask: Ask) {
             binding.askAmount.text = ask.amount
             binding.askPrice.text = ask.price
+            binding.askTotal.text = ask.total
         }
     }
 
