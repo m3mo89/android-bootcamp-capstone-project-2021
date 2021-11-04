@@ -22,9 +22,9 @@
             android:gravity="center"
             android:paddingTop="8dp">
             <ImageView
-                android:id="@+id/imageViewSprite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:id="@+id/book_sprite_url"
+                android:layout_width="80dp"
+                android:layout_height="80dp"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="0dp"
@@ -35,21 +35,19 @@
             android:orientation="vertical"
             android:paddingTop="0dp">
             <TextView
-                android:id="@+id/textViewId"
+                android:id="@+id/book_id"
+                style="@style/Theme.CryptoChallenge.AccentTextAppearance.TitleTextAppearance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center|bottom"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/black"/>
+                android:gravity="center|bottom"/>
             <TextView
-                android:id="@+id/textViewName"
+                android:id="@+id/book_name"
+                style="@style/Theme.CryptoChallenge.TertiaryTextAppearance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/black"/>
+                android:gravity="center"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>
