@@ -5,12 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.wizeline.bootcamp.capstone.data.mock.mockAsks
-import com.wizeline.bootcamp.capstone.data.mock.mockBids
-import com.wizeline.bootcamp.capstone.data.mock.mockTicker
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookDetailsBinding
 
 class BookDetailsFragment : Fragment() {
@@ -20,12 +17,9 @@ class BookDetailsFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentBookDetailsBinding
-
     private lateinit var askListAdapter: AskListAdapter
-
     private lateinit var bidListAdapter: BidListAdapter
-
-    private lateinit var viewModel: BookDetailsViewModel
+    private val viewModel: BookDetailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,33 +31,25 @@ class BookDetailsFragment : Fragment() {
             .root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BookDetailsViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        configAdapters()
-        bindTickerValues()
+
+        val bookId = requireArguments().getString("book_id")
+
+        if (bookId != null) {
+            initAdapters()
+            requestData(bookId)
+            observeTicker()
+            observeAskList()
+            observeBidList()
+        }
     }
 
-    private fun configAdapters() {
-        configAskListAdapter()
-        configBidListAdapter()
+    private fun initAdapters() {
+        initAskListAdapter()
+        initBidListAdapter()
     }
 
-    private fun bindTickerValues() {
-        binding.book.text = mockTicker.id
-        binding.cryptoName.text = mockTicker.cryptoName
-        binding.bookPrice.text = mockTicker.lastPrice
-        binding.dayHighLow.text = "${mockTicker.lowPrice} - ${mockTicker.highPrice}"
-        binding.askPriceValue.text = mockTicker.ask
-        binding.bidPriceValue.text = mockTicker.bid
-        Glide.with(binding.root).load(mockTicker.spriteUrl).into(binding.bookSpriteUrl)
-    }
-
-    private fun configAskListAdapter() {
+    private fun initAskListAdapter() {
         askListAdapter = AskListAdapter()
 
         binding.askDetailsList.run {
@@ -71,11 +57,9 @@ class BookDetailsFragment : Fragment() {
             layoutManager = object : LinearLayoutManager(requireContext(), HORIZONTAL, false) {
             }
         }
-
-        askListAdapter.submitList(mockAsks)
     }
 
-    private fun configBidListAdapter() {
+    private fun initBidListAdapter() {
         bidListAdapter = BidListAdapter()
 
         binding.bidDetailsList.run {
@@ -83,7 +67,34 @@ class BookDetailsFragment : Fragment() {
             layoutManager = object : LinearLayoutManager(requireContext(), HORIZONTAL, false) {
             }
         }
+    }
 
-        bidListAdapter.submitList(mockBids)
+    private fun requestData(bookId: String) {
+        viewModel.requestData(bookId)
+        viewModel.requestOrderBookData(bookId)
+    }
+
+    private fun observeTicker() {
+        viewModel.ticker.observe(viewLifecycleOwner, {
+            binding.book.text = it?.id
+            binding.cryptoName.text = it?.cryptoName
+            binding.bookPrice.text = it?.lastPrice
+            binding.dayHighLow.text = "${it?.lowPrice} - ${it?.highPrice}"
+            binding.askPriceValue.text = it?.ask
+            binding.bidPriceValue.text = it?.bid
+            Glide.with(binding.root).load(it?.spriteUrl).into(binding.bookSpriteUrl)
+        })
+    }
+
+    private fun observeAskList() {
+        viewModel.askList.observe(viewLifecycleOwner, {
+            askListAdapter.submitList(it)
+        })
+    }
+
+    private fun observeBidList() {
+        viewModel.bidList.observe(viewLifecycleOwner, {
+            bidListAdapter.submitList(it)
+        })
     }
 }
