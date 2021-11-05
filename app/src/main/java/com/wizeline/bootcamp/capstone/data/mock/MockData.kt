@@ -132,7 +132,8 @@ val mockTicker = Ticker(
     id = "eth_brl",
     cryptoName = "Ether",
     lastPrice = "25,196.49",
-    lowPrice = "25,179.813", highPrice = "26,353.86",
+    lowPrice = "25,179.813",
+    highPrice = "26,353.86",
     ask = "25,401.53",
     bid = "25,333.08",
     spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/eth"
