@@ -11,9 +11,9 @@ import com.wizeline.bootcamp.capstone.domain.Book
 
 typealias OnBookClicked = (String) -> Unit
 
-class BookListAdapter (
+class BookListAdapter(
     private val onBookClicked: OnBookClicked,
-) : ListAdapter<Book, BookListAdapter.BookViewHolder>(DIFF_CALLBACK)  {
+) : ListAdapter<Book, BookListAdapter.BookViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         return LayoutInflater.from(parent.context)
             .let { inflater -> ItemBookBinding.inflate(inflater, parent, false) }
@@ -40,6 +40,7 @@ class BookListAdapter (
             }
         }
     }
+
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Book>() {
             override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean =

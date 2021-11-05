@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wizeline.bootcamp.capstone.databinding.ItemAskBinding
 import com.wizeline.bootcamp.capstone.domain.Ask
 
-class AskListAdapter : ListAdapter<Ask, AskListAdapter.AskViewHolder>(DIFF_CALLBACK)  {
+class AskListAdapter : ListAdapter<Ask, AskListAdapter.AskViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AskViewHolder {
 
         return LayoutInflater.from(parent.context)

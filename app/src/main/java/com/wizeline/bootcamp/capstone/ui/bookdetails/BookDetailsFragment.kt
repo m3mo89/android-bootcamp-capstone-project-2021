@@ -1,11 +1,11 @@
 package com.wizeline.bootcamp.capstone.ui.bookdetails
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.wizeline.bootcamp.capstone.data.mock.mockAsks
@@ -53,8 +53,7 @@ class BookDetailsFragment : Fragment() {
         configBidListAdapter()
     }
 
-    private fun bindTickerValues()
-    {
+    private fun bindTickerValues() {
         binding.book.text = mockTicker.id
         binding.cryptoName.text = mockTicker.cryptoName
         binding.bookPrice.text = mockTicker.lastPrice
@@ -69,7 +68,7 @@ class BookDetailsFragment : Fragment() {
 
         binding.askDetailsList.run {
             adapter = askListAdapter
-            layoutManager = object : LinearLayoutManager(requireContext(), HORIZONTAL, false){
+            layoutManager = object : LinearLayoutManager(requireContext(), HORIZONTAL, false) {
             }
         }
 
@@ -81,7 +80,7 @@ class BookDetailsFragment : Fragment() {
 
         binding.bidDetailsList.run {
             adapter = bidListAdapter
-            layoutManager = object : LinearLayoutManager(requireContext(), HORIZONTAL, false){
+            layoutManager = object : LinearLayoutManager(requireContext(), HORIZONTAL, false) {
             }
         }
 

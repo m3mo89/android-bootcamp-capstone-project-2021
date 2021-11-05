@@ -7,5 +7,8 @@ import retrofit2.http.Query
 
 interface OrderBookService {
     @GET("order_book/")
-    suspend fun getOrderBookByBookAndAggregate(@Query("book") book: String, @Query("aggregate") aggregate: Boolean) : Response<OrderBookResponse>
+    suspend fun getOrderBookByBookAndAggregate(
+        @Query("book") book: String,
+        @Query("aggregate") aggregate: Boolean
+    ): Response<OrderBookResponse>
 }

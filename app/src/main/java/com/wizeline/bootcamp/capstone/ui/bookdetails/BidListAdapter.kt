@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wizeline.bootcamp.capstone.databinding.ItemBidBinding
 import com.wizeline.bootcamp.capstone.domain.Bid
 
-class BidListAdapter : ListAdapter<Bid, BidListAdapter.BidViewHolder>(DIFF_CALLBACK)  {
+class BidListAdapter : ListAdapter<Bid, BidListAdapter.BidViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BidViewHolder {
         return LayoutInflater.from(parent.context)
             .let { inflater -> ItemBidBinding.inflate(inflater, parent, false) }

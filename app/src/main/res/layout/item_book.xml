@@ -1,53 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="4dp"
-    android:background="?attr/selectableItemBackground"
-    android:layout_margin="8dp"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:weightSum="2">
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:paddingTop="8dp">
+
             <ImageView
                 android:id="@+id/book_sprite_url"
                 android:layout_width="80dp"
-                android:layout_height="80dp"/>
+                android:layout_height="80dp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:weightSum="2"
             android:orientation="vertical"
-            android:paddingTop="0dp">
+            android:paddingTop="0dp"
+            android:weightSum="2">
+
             <TextView
                 android:id="@+id/book_id"
                 style="@style/Theme.CryptoChallenge.AccentTextAppearance.TitleTextAppearance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center|bottom"/>
+                android:gravity="center|bottom" />
+
             <TextView
                 android:id="@+id/book_name"
                 style="@style/Theme.CryptoChallenge.TertiaryTextAppearance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"/>
+                android:gravity="center" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>
