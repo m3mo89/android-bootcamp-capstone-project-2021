@@ -10,14 +10,15 @@ import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
     private val retrofitClient = NetworkingModule.provideRetrofitClient()
-    private val availableBooksService = NetworkingModule.provideAvailableBooksService(retrofitClient)
+    private val availableBooksService =
+        NetworkingModule.provideAvailableBooksService(retrofitClient)
     private val tickerService = NetworkingModule.provideTickerService(retrofitClient)
     private val orderBookService = NetworkingModule.provideOrderBookService(retrofitClient)
 
     fun loadAvailableBooksData() {
         viewModelScope.launch {
 
-            val repo:AvailableBooksRepo = AvailableBooksRepo(availableBooksService)
+            val repo: AvailableBooksRepo = AvailableBooksRepo(availableBooksService)
 
             val response = repo.getAvailableBooks().body()
 
@@ -31,7 +32,7 @@ class MainViewModel : ViewModel() {
 
     fun loadTickerData() {
         viewModelScope.launch {
-            val repo:TickerRepo = TickerRepo(tickerService)
+            val repo: TickerRepo = TickerRepo(tickerService)
             val response = repo.getTickerByBook("ltc_usd").body()
 
             val payload = response?.payload
@@ -49,13 +50,13 @@ class MainViewModel : ViewModel() {
 
             println("Asks")
 
-            payload?.asks?.forEach{
+            payload?.asks?.forEach {
                 println("Book: ${it.book} Price: ${it.price}")
             }
 
             println("Bids")
 
-            payload?.bids?.forEach{
+            payload?.bids?.forEach {
                 println("Book: ${it.book} Price: ${it.price}")
             }
 
