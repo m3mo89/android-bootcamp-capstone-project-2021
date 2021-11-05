@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.wizeline.bootcamp.capstone.data.mock.mockBooks
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookListBinding
 
 // view holders' height should take 1/7 of the screen
@@ -23,12 +22,9 @@ class BookListFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentBookListBinding
-
     private lateinit var navController: NavController
-
     private lateinit var bookListAdapter: BookListAdapter
-
-    private lateinit var viewModel: BookListViewModel
+    private val viewModel: BookListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,19 +36,20 @@ class BookListFragment : Fragment() {
             .root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BookListViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initAdapter()
+        requestData()
+        observeBookList()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    private fun initAdapter() {
+        navController = findNavController()
         bookListAdapter = BookListAdapter { bookId ->
             BookListFragmentDirections
                 .toBookDetailsFragment(bookId)
                 .let { navController.navigate(it) }
         }
-        navController = findNavController()
+
         binding.bookList.run {
             adapter = bookListAdapter
             layoutManager = object : LinearLayoutManager(requireContext()) {
@@ -63,7 +60,15 @@ class BookListFragment : Fragment() {
             }
             setHasFixedSize(true)
         }
+    }
 
-        bookListAdapter.submitList(mockBooks)
+    private fun requestData() {
+        viewModel.requestData()
+    }
+
+    private fun observeBookList() {
+        viewModel.bookList.observe(viewLifecycleOwner, {
+            bookListAdapter.submitList(it)
+        })
     }
 }
