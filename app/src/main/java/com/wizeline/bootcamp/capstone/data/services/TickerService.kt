@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface TickerService {
     @GET("ticker/")
-    suspend fun getTickerByBook(@Query("book") book: String) : Response<TickerResponse>
+    suspend fun getTickerByBook(@Query("book") book: String): Response<TickerResponse>
 }

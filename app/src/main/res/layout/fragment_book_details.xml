@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:padding="@dimen/_16dp">
+
+    <TextView
+        android:id="@+id/crypto_name"
+        style="@style/Theme.CryptoChallenge.AccentTextAppearance.TitleTextAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/book_sprite_url"
+        android:layout_width="@dimen/_60dp"
+        android:layout_height="@dimen/_60dp"
+        android:layout_marginTop="@dimen/_5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/crypto_name" />
+
+    <TextView
+        android:id="@+id/book"
+        style="@style/Theme.CryptoChallenge.TertiaryTextAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        app:layout_constraintBottom_toTopOf="@id/book_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/book_sprite_url" />
+
+    <TextView
+        android:id="@+id/book_price"
+        style="@style/Theme.CryptoChallenge.AccentTextAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/_32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/crypto_name"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <TextView
+        android:id="@+id/day_high_low"
+        style="@style/Theme.CryptoChallenge.TertiaryTextAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/book_price"
+        app:layout_constraintVertical_bias="0.015" />
+
+    <TextView
+        android:id="@+id/ask_price_label"
+        style="@style/Theme.CryptoChallenge.TertiaryTextAppearance"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ask"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/separator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/day_high_low"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/ask_price_value"
+        style="@style/Theme.CryptoChallenge.PrimaryTextAppearance"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/separator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bid_price_label"
+        app:layout_constraintVertical_bias="0" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="@dimen/_2dp"
+        android:layout_height="@dimen/_0dp"
+        android:background="?android:attr/colorAccent"
+        android:rotation="15"
+        app:layout_constraintBottom_toBottomOf="@id/ask_price_value"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ask_price_label"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/bid_price_label"
+        style="@style/Theme.CryptoChallenge.TertiaryTextAppearance"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/bid"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/separator"
+        app:layout_constraintTop_toBottomOf="@id/day_high_low"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/bid_price_value"
+        style="@style/Theme.CryptoChallenge.PrimaryTextAppearance"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/separator"
+        app:layout_constraintTop_toBottomOf="@id/bid_price_label"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView
+        android:id="@+id/buy_orders"
+        style="@style/Theme.CryptoChallenge.AccentTextAppearance"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40dp"
+        android:text="@string/buy_orders"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ask_price_value"
+        app:layout_constraintVertical_bias="0" />
+
+    <LinearLayout
+        android:id="@+id/ask_details_list_header"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_60dp"
+        android:layout_marginTop="@dimen/_8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buy_orders"
+        app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:id="@+id/ask_price_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/_12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ask_amount_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/amount"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/_12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ask_total_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8dp"
+            android:text="@string/total"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/_12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ask_details_list"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="@dimen/_60dp"
+        android:layout_marginTop="@dimen/_10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ask_details_list_header"
+        app:layout_constraintTop_toBottomOf="@id/buy_orders"
+        tools:listitem="@layout/item_ask" />
+
+    <TextView
+        android:id="@+id/sell_orders"
+        style="@style/Theme.CryptoChallenge.AccentTextAppearance"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10dp"
+        android:text="@string/sell_orders"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ask_details_list"
+        app:layout_constraintVertical_bias="0" />
+
+    <LinearLayout
+        android:id="@+id/bid_details_list_header"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_60dp"
+        android:layout_marginTop="@dimen/_8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sell_orders"
+        app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:id="@+id/bid_price_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/_12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bid_amount_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/amount"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/_12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bid_total_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8dp"
+            android:text="@string/total"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/_12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bid_details_list"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="@dimen/_60dp"
+        android:layout_marginTop="@dimen/_10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ask_details_list_header"
+        app:layout_constraintTop_toBottomOf="@id/sell_orders"
+        tools:listitem="@layout/item_ask" />
+</androidx.constraintlayout.widget.ConstraintLayout>

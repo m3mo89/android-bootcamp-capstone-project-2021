@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface AvailableBooksService {
     @GET("available_books")
-    suspend fun getAvailableBooks() : Response<AvailableBooksResponse>
+    suspend fun getAvailableBooks(): Response<AvailableBooksResponse>
 }
