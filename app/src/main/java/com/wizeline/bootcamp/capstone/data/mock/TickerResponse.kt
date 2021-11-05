@@ -3,7 +3,7 @@ package com.wizeline.bootcamp.capstone.data.mock
 import com.google.gson.annotations.SerializedName
 
 data class TickerResponse(
-    var success: Boolean,
+    var success: Boolean?,
     var payload: Ticker?
 )
 

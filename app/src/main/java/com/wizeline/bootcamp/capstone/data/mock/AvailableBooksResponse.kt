@@ -3,7 +3,7 @@ package com.wizeline.bootcamp.capstone.data.mock
 import com.google.gson.annotations.SerializedName
 
 data class AvailableBooksResponse(
-    var success: Boolean,
+    var success: Boolean?,
     var payload: List<AvailableBook>?
 )
 
