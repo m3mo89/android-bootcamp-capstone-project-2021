@@ -5,9 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
 import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
 import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
-import com.wizeline.bootcamp.capstone.data.services.AvailableBooksService
-import com.wizeline.bootcamp.capstone.data.services.OrderBookService
-import com.wizeline.bootcamp.capstone.data.services.TickerService
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
 import kotlinx.coroutines.launch
 
