@@ -10,7 +10,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wizeline.bootcamp.capstone.data.mapper.AvailableBookResponseMapper
+import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookListBinding
+import com.wizeline.bootcamp.capstone.di.NetworkingModule
 
 // view holders' height should take 1/7 of the screen
 private const val VIEW_HOLDER_SCREEN_PROPORTION = 1.0 / 7.0
@@ -24,7 +27,16 @@ class BookListFragment : Fragment() {
     private lateinit var binding: FragmentBookListBinding
     private lateinit var navController: NavController
     private lateinit var bookListAdapter: BookListAdapter
-    private val viewModel: BookListViewModel by viewModels()
+
+    private val retrofitClient = NetworkingModule.provideRetrofitClient()
+    private val availableBooksService =
+        NetworkingModule.provideAvailableBooksService(retrofitClient)
+    private val repo: AvailableBooksRepo = AvailableBooksRepo(availableBooksService)
+    private val booksMapper = AvailableBookResponseMapper()
+
+    private val viewModel: BookListViewModel by viewModels {
+        BookListViewModelFactory(this, repo, booksMapper)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
