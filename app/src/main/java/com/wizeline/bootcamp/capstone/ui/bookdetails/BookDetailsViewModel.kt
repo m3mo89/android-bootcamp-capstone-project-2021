@@ -9,17 +9,18 @@ import com.wizeline.bootcamp.capstone.data.mapper.OrderBookBidResponseMapper
 import com.wizeline.bootcamp.capstone.data.mapper.TickerResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
 import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
-import com.wizeline.bootcamp.capstone.di.NetworkingModule
 import com.wizeline.bootcamp.capstone.domain.Ask
 import com.wizeline.bootcamp.capstone.domain.Bid
 import com.wizeline.bootcamp.capstone.domain.Ticker
 import kotlinx.coroutines.launch
 
-class BookDetailsViewModel : ViewModel() {
-    private val retrofitClient = NetworkingModule.provideRetrofitClient()
-    private val tickerService = NetworkingModule.provideTickerService(retrofitClient)
-    private val orderBookService = NetworkingModule.provideOrderBookService(retrofitClient)
-
+class BookDetailsViewModel(
+    private val tickerRepo: TickerRepo,
+    private val orderBookRepo: OrderBookRepo,
+    private val tickerMapper: TickerResponseMapper,
+    private val orderbookAskMapper: OrderBookAskResponseMapper,
+    private val orderbookBidMapper: OrderBookBidResponseMapper
+) : ViewModel() {
     private var _ticker: MutableLiveData<Ticker?> = MutableLiveData<Ticker?>()
     val ticker: LiveData<Ticker?> = _ticker
 
@@ -31,9 +32,7 @@ class BookDetailsViewModel : ViewModel() {
 
     fun requestData(book: String) {
         viewModelScope.launch {
-            val repo: TickerRepo = TickerRepo(tickerService)
-            val tickerMapper = TickerResponseMapper()
-            val response = repo.getTickerByBook(book).body()
+            val response = tickerRepo.getTickerByBook(book).body()
 
             val success = response?.success ?: false
 
@@ -51,10 +50,7 @@ class BookDetailsViewModel : ViewModel() {
 
     fun requestOrderBookData(book: String) {
         viewModelScope.launch {
-            val orderbookAskMapper = OrderBookAskResponseMapper()
-            val orderbookBidMapper = OrderBookBidResponseMapper()
-            val repo: OrderBookRepo = OrderBookRepo(orderBookService)
-            val response = repo.getOrderBookByBookAndAggregate(book, true).body()
+            val response = orderBookRepo.getOrderBookByBookAndAggregate(book, true).body()
 
             val success = response?.success ?: false
 
