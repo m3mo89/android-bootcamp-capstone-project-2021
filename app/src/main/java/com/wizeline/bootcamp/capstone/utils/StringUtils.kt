@@ -22,8 +22,8 @@ val mapOfCoinNames = mapOf(
 )
 
 fun String?.getCryptoName(): String {
-    var from = this?.substringBefore("_")
-    var to = this?.substringAfter("_")
+    var from = this?.substringBefore(Constants.UNDERSCORE_DELIMITER)
+    var to = this?.substringAfter(Constants.UNDERSCORE_DELIMITER)
 
     from = mapOfCoinNames.get(from) ?: ""
     to = mapOfCoinNames.get(to) ?: ""
