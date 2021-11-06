@@ -8,7 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.wizeline.bootcamp.capstone.data.mapper.OrderBookAskResponseMapper
+import com.wizeline.bootcamp.capstone.data.mapper.OrderBookBidResponseMapper
+import com.wizeline.bootcamp.capstone.data.mapper.TickerResponseMapper
+import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
+import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookDetailsBinding
+import com.wizeline.bootcamp.capstone.di.NetworkingModule
 
 class BookDetailsFragment : Fragment() {
 
@@ -19,7 +25,26 @@ class BookDetailsFragment : Fragment() {
     private lateinit var binding: FragmentBookDetailsBinding
     private lateinit var askListAdapter: AskListAdapter
     private lateinit var bidListAdapter: BidListAdapter
-    private val viewModel: BookDetailsViewModel by viewModels()
+
+    private val retrofitClient = NetworkingModule.provideRetrofitClient()
+    private val tickerService = NetworkingModule.provideTickerService(retrofitClient)
+    private val orderBookService = NetworkingModule.provideOrderBookService(retrofitClient)
+    private val tickerRepo: TickerRepo = TickerRepo(tickerService)
+    private val tickerMapper = TickerResponseMapper()
+    private val orderbookAskMapper = OrderBookAskResponseMapper()
+    private val orderbookBidMapper = OrderBookBidResponseMapper()
+    private val orderBookRepo: OrderBookRepo = OrderBookRepo(orderBookService)
+
+    private val viewModel: BookDetailsViewModel by viewModels {
+        BookDetailsViewModelFactory(
+            this,
+            tickerRepo,
+            orderBookRepo,
+            tickerMapper,
+            orderbookAskMapper,
+            orderbookBidMapper
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
