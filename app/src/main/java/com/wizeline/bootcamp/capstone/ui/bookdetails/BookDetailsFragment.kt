@@ -104,11 +104,20 @@ class BookDetailsFragment : Fragment() {
             binding.book.text = it?.id
             binding.cryptoName.text = it?.cryptoName
             binding.bookPrice.text = it?.lastPrice
-            binding.dayHighLow.text = "${it?.lowPrice} - ${it?.highPrice}"
+            binding.dayHighLow.text = getDayHighLowText(it?.lowPrice, it?.highPrice)
             binding.askPriceValue.text = it?.ask
             binding.bidPriceValue.text = it?.bid
             Glide.with(binding.root).load(it?.spriteUrl).into(binding.bookSpriteUrl)
         })
+    }
+
+    private fun getDayHighLowText(lowPrice:String?, highPrice:String?): String
+    {
+        if (lowPrice.isNullOrEmpty() || highPrice.isNullOrEmpty()) {
+            return  ""
+        }
+
+        return "$lowPrice - $highPrice"
     }
 
     private fun observeAskList() {
