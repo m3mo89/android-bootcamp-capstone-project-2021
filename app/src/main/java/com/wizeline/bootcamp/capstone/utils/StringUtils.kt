@@ -1,5 +1,8 @@
 package com.wizeline.bootcamp.capstone.utils
 
+import android.content.Context
+import com.wizeline.bootcamp.capstone.R
+
 val mapOfCoinNames = mapOf(
     "btc" to "Bitcoin",
     "eth" to "Ether",
@@ -21,7 +24,7 @@ val mapOfCoinNames = mapOf(
     "brl" to "Reales brasileños",
 )
 
-fun String?.getCryptoName(): String {
+fun String?.getCryptoName(context: Context): String {
     var from = this?.substringBefore(Constants.UNDERSCORE_DELIMITER)
     var to = this?.substringAfter(Constants.UNDERSCORE_DELIMITER)
 
@@ -32,7 +35,7 @@ fun String?.getCryptoName(): String {
         return ""
     }
 
-    return "$from to $to"
+    return context.resources.getString(R.string.to, from, to)
 }
 
 fun String?.asPrice(): String {

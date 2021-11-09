@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wizeline.bootcamp.capstone.databinding.ItemBookBinding
 import com.wizeline.bootcamp.capstone.domain.Book
+import com.wizeline.bootcamp.capstone.utils.getCryptoName
 
 typealias OnBookClicked = (String) -> Unit
 
 class BookListAdapter(
-    private val onBookClicked: OnBookClicked,
+    private val onBookClicked: OnBookClicked
 ) : ListAdapter<Book, BookListAdapter.BookViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         return LayoutInflater.from(parent.context)
@@ -31,7 +32,7 @@ class BookListAdapter(
 
         fun bind(book: Book) {
             binding.bookId.text = book.id.toString()
-            binding.bookName.text = book.name
+            binding.bookName.text = book.name.getCryptoName(binding.root.context)
             Glide.with(binding.root).load(book.spriteUrl).into(binding.bookSpriteUrl)
 
             binding.root.setOnClickListener()

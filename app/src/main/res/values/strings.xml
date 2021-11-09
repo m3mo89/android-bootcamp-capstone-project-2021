@@ -7,4 +7,5 @@
     <string name="amount">Amount </string>
     <string name="total">Total </string>
     <string name="sell_orders">Sell Orders</string>
+    <string name="to">%s to %s</string>
 </resources>

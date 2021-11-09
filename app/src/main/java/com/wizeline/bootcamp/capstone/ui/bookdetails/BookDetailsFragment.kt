@@ -15,6 +15,7 @@ import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
 import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookDetailsBinding
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
+import com.wizeline.bootcamp.capstone.utils.getCryptoName
 
 class BookDetailsFragment : Fragment() {
 
@@ -102,7 +103,7 @@ class BookDetailsFragment : Fragment() {
     private fun observeTicker() {
         viewModel.ticker.observe(viewLifecycleOwner, {
             binding.book.text = it?.id
-            binding.cryptoName.text = it?.cryptoName
+            binding.cryptoName.text = it?.cryptoName.getCryptoName(requireContext())
             binding.bookPrice.text = it?.lastPrice
             binding.dayHighLow.text = getDayHighLowText(it?.lowPrice, it?.highPrice)
             binding.askPriceValue.text = it?.ask
