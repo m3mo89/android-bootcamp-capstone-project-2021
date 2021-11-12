@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wizeline.bootcamp.capstone.databinding.ItemBookBinding
-import com.wizeline.bootcamp.capstone.domain.Book
+import com.wizeline.bootcamp.capstone.domain.BookDTO
 import com.wizeline.bootcamp.capstone.utils.getCryptoName
 
 typealias OnBookClicked = (String) -> Unit
 
 class BookListAdapter(
     private val onBookClicked: OnBookClicked
-) : ListAdapter<Book, BookListAdapter.BookViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<BookDTO, BookListAdapter.BookViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         return LayoutInflater.from(parent.context)
             .let { inflater -> ItemBookBinding.inflate(inflater, parent, false) }
@@ -30,7 +30,7 @@ class BookListAdapter(
         private val onBookClicked: OnBookClicked,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(book: Book) {
+        fun bind(book: BookDTO) {
             binding.bookId.text = book.id.toString()
             binding.bookName.text = book.name.getCryptoName(binding.root.context)
             Glide.with(binding.root).load(book.spriteUrl).into(binding.bookSpriteUrl)
@@ -43,11 +43,11 @@ class BookListAdapter(
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Book>() {
-            override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean =
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BookDTO>() {
+            override fun areItemsTheSame(oldItem: BookDTO, newItem: BookDTO): Boolean =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean =
+            override fun areContentsTheSame(oldItem: BookDTO, newItem: BookDTO): Boolean =
                 oldItem == newItem
         }
     }

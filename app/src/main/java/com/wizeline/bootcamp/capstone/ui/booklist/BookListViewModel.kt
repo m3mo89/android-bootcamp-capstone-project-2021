@@ -7,16 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.wizeline.bootcamp.capstone.data.NetworkResult
 import com.wizeline.bootcamp.capstone.data.mapper.AvailableBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
-import com.wizeline.bootcamp.capstone.domain.Book
+import com.wizeline.bootcamp.capstone.domain.BookDTO
 import kotlinx.coroutines.launch
 
 class BookListViewModel(
     private val availableBooksRepo: AvailableBooksRepo,
     private val booksMapper: AvailableBookResponseMapper,
 ) : ViewModel() {
-    private var _result: MutableLiveData<NetworkResult<List<Book>>> =
-        MutableLiveData<NetworkResult<List<Book>>>()
-    val result: LiveData<NetworkResult<List<Book>>> = _result
+    private var _result: MutableLiveData<NetworkResult<List<BookDTO>>> =
+        MutableLiveData<NetworkResult<List<BookDTO>>>()
+    val result: LiveData<NetworkResult<List<BookDTO>>> = _result
 
     fun requestData() {
         viewModelScope.launch {

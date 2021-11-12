@@ -16,7 +16,7 @@ import com.wizeline.bootcamp.capstone.data.mapper.AvailableBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookListBinding
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
-import com.wizeline.bootcamp.capstone.domain.Book
+import com.wizeline.bootcamp.capstone.domain.BookDTO
 
 // view holders' height should take 1/7 of the screen
 private const val VIEW_HOLDER_SCREEN_PROPORTION = 1.0 / 7.0
@@ -91,7 +91,7 @@ class BookListFragment : Fragment() {
         })
     }
 
-    private fun resultSuccess(books: List<Book>?) {
+    private fun resultSuccess(books: List<BookDTO>?) {
         hideLoadingIndicator()
         bindData(books)
     }
@@ -105,7 +105,7 @@ class BookListFragment : Fragment() {
         showLoadingIndicator()
     }
 
-    private fun bindData(books: List<Book>?) {
+    private fun bindData(books: List<BookDTO>?) {
         bookListAdapter.submitList(books)
     }
 
