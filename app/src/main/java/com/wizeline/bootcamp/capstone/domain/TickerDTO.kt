@@ -1,6 +1,6 @@
 package com.wizeline.bootcamp.capstone.domain
 
-data class Ticker(
+data class TickerDTO(
     val id: String,
     val spriteUrl: String,
     val cryptoName: String,

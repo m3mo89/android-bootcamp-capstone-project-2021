@@ -3,7 +3,7 @@ package com.wizeline.bootcamp.capstone.data.mock
 import com.wizeline.bootcamp.capstone.domain.AskDTO
 import com.wizeline.bootcamp.capstone.domain.BidDTO
 import com.wizeline.bootcamp.capstone.domain.BookDTO
-import com.wizeline.bootcamp.capstone.domain.Ticker
+import com.wizeline.bootcamp.capstone.domain.TickerDTO
 
 val mockBooks = listOf(
     BookDTO(
@@ -128,7 +128,7 @@ val mockBooks = listOf(
     ),
 )
 
-val mockTicker = Ticker(
+val mockTicker = TickerDTO(
     id = "eth_brl",
     cryptoName = "Ether",
     lastPrice = "25,196.49",

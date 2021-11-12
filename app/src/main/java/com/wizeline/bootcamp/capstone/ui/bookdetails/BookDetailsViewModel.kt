@@ -10,7 +10,7 @@ import com.wizeline.bootcamp.capstone.data.mapper.TickerResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
 import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
-import com.wizeline.bootcamp.capstone.domain.Ticker
+import com.wizeline.bootcamp.capstone.domain.TickerDTO
 import kotlinx.coroutines.launch
 
 class BookDetailsViewModel(
@@ -19,9 +19,9 @@ class BookDetailsViewModel(
     private val tickerMapper: TickerResponseMapper,
     private val orderbookMapper: OrderBookResponseMapper,
 ) : ViewModel() {
-    private var _ticker: MutableLiveData<NetworkResult<Ticker>> =
-        MutableLiveData<NetworkResult<Ticker>>()
-    val ticker: LiveData<NetworkResult<Ticker>> = _ticker
+    private var _ticker: MutableLiveData<NetworkResult<TickerDTO>> =
+        MutableLiveData<NetworkResult<TickerDTO>>()
+    val ticker: LiveData<NetworkResult<TickerDTO>> = _ticker
 
     private var _orderBook: MutableLiveData<NetworkResult<OrderBookDTO>> =
         MutableLiveData<NetworkResult<OrderBookDTO>>()

@@ -18,7 +18,7 @@ import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookDetailsBinding
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
-import com.wizeline.bootcamp.capstone.domain.Ticker
+import com.wizeline.bootcamp.capstone.domain.TickerDTO
 import com.wizeline.bootcamp.capstone.utils.getCryptoName
 
 class BookDetailsFragment : Fragment() {
@@ -121,7 +121,7 @@ class BookDetailsFragment : Fragment() {
         })
     }
 
-    private fun tickerResultSuccess(ticker: Ticker?) {
+    private fun tickerResultSuccess(ticker: TickerDTO?) {
         hideLoadingIndicator()
         bindTickerData(ticker)
     }
@@ -140,7 +140,7 @@ class BookDetailsFragment : Fragment() {
         showLoadingIndicator()
     }
 
-    private fun bindTickerData(ticker: Ticker?) {
+    private fun bindTickerData(ticker: TickerDTO?) {
         binding.book.text = ticker?.id
         binding.cryptoName.text = ticker?.cryptoName.getCryptoName(requireContext())
         binding.bookPrice.text = ticker?.lastPrice
