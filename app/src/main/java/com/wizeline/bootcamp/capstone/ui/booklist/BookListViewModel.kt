@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wizeline.bootcamp.capstone.data.NetworkResult
 import com.wizeline.bootcamp.capstone.data.mapper.AvailableBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
 import com.wizeline.bootcamp.capstone.domain.Book
@@ -13,22 +14,32 @@ class BookListViewModel(
     private val availableBooksRepo: AvailableBooksRepo,
     private val booksMapper: AvailableBookResponseMapper,
 ) : ViewModel() {
-    private var _bookList: MutableLiveData<List<Book>?> = MutableLiveData<List<Book>?>()
-    val bookList: LiveData<List<Book>?> = _bookList
+    private var _result: MutableLiveData<NetworkResult<List<Book>>> =
+        MutableLiveData<NetworkResult<List<Book>>>()
+    val result: LiveData<NetworkResult<List<Book>>> = _result
 
     fun requestData() {
         viewModelScope.launch {
-            val response = availableBooksRepo.getAvailableBooks().body()
-            val success = response?.success ?: false
+            _result.value = NetworkResult.Loading()
 
-            if (success) {
-                val payload = response?.payload
+            try {
+                val response = availableBooksRepo.getAvailableBooks().body()
 
-                if (payload != null) {
-                    val listOfBooks = booksMapper.mapList(payload)
+                val success = response?.success ?: false
 
-                    _bookList.postValue(listOfBooks)
+                if (success) {
+                    val payload = response?.payload
+
+                    if (payload != null) {
+                        val listOfBooks = booksMapper.mapList(payload)
+
+                        _result.postValue(NetworkResult.Success(listOfBooks))
+                    }
+                } else {
+                    _result.postValue(NetworkResult.Error("Unknown issue"))
                 }
+            } catch (e: Exception) {
+                _result.postValue(NetworkResult.Error(e.message))
             }
         }
     }
