@@ -4,13 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.wizeline.bootcamp.capstone.data.mapper.OrderBookAskResponseMapper
-import com.wizeline.bootcamp.capstone.data.mapper.OrderBookBidResponseMapper
+import com.wizeline.bootcamp.capstone.data.NetworkResult
+import com.wizeline.bootcamp.capstone.data.mapper.OrderBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.mapper.TickerResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
 import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
-import com.wizeline.bootcamp.capstone.domain.Ask
-import com.wizeline.bootcamp.capstone.domain.Bid
+import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
 import com.wizeline.bootcamp.capstone.domain.Ticker
 import kotlinx.coroutines.launch
 
@@ -18,54 +17,62 @@ class BookDetailsViewModel(
     private val tickerRepo: TickerRepo,
     private val orderBookRepo: OrderBookRepo,
     private val tickerMapper: TickerResponseMapper,
-    private val orderbookAskMapper: OrderBookAskResponseMapper,
-    private val orderbookBidMapper: OrderBookBidResponseMapper
+    private val orderbookMapper: OrderBookResponseMapper,
 ) : ViewModel() {
-    private var _ticker: MutableLiveData<Ticker?> = MutableLiveData<Ticker?>()
-    val ticker: LiveData<Ticker?> = _ticker
+    private var _ticker: MutableLiveData<NetworkResult<Ticker>> =
+        MutableLiveData<NetworkResult<Ticker>>()
+    val ticker: LiveData<NetworkResult<Ticker>> = _ticker
 
-    private var _askList: MutableLiveData<List<Ask>?> = MutableLiveData<List<Ask>?>()
-    val askList: LiveData<List<Ask>?> = _askList
-
-    private var _bidList: MutableLiveData<List<Bid>?> = MutableLiveData<List<Bid>?>()
-    val bidList: LiveData<List<Bid>?> = _bidList
+    private var _orderBook: MutableLiveData<NetworkResult<OrderBookDTO>> =
+        MutableLiveData<NetworkResult<OrderBookDTO>>()
+    val orderBook: LiveData<NetworkResult<OrderBookDTO>> = _orderBook
 
     fun requestData(book: String) {
         viewModelScope.launch {
-            val response = tickerRepo.getTickerByBook(book).body()
+            _ticker.postValue(NetworkResult.Loading())
 
-            val success = response?.success ?: false
+            try {
+                val response = tickerRepo.getTickerByBook(book).body()
+                val success = response?.success ?: false
 
-            if (success) {
-                val payload = response?.payload
+                if (success) {
+                    val payload = response?.payload
 
-                if (payload != null) {
-                    val ticker = tickerMapper.map(payload)
+                    if (payload != null) {
+                        val ticker = tickerMapper.map(payload)
 
-                    _ticker.postValue(ticker)
+                        _ticker.postValue(NetworkResult.Success(ticker))
+                    }
+                } else {
+                    _ticker.postValue(NetworkResult.Error("Unknown issue"))
                 }
+            } catch (e: Exception) {
+                _ticker.postValue(NetworkResult.Error(e.message))
             }
         }
     }
 
     fun requestOrderBookData(book: String) {
         viewModelScope.launch {
-            val response = orderBookRepo.getOrderBookByBookAndAggregate(book, true).body()
+            _ticker.postValue(NetworkResult.Loading())
 
-            val success = response?.success ?: false
+            try {
+                val response = orderBookRepo.getOrderBookByBookAndAggregate(book, true).body()
+                val success = response?.success ?: false
 
-            if (success) {
-                val payload = response?.payload
+                if (success) {
+                    val payload = response?.payload
 
-                if (payload != null) {
-                    val asks = orderbookAskMapper.mapList(payload.asks)
+                    if (payload != null) {
+                        val orderBook = orderbookMapper.map(payload)
 
-                    val bids = orderbookBidMapper.mapList(payload.bids)
-
-                    _askList.postValue(asks)
-
-                    _bidList.postValue(bids)
+                        _orderBook.postValue(NetworkResult.Success(orderBook))
+                    }
+                } else {
+                    _orderBook.postValue(NetworkResult.Error("Unknown issue"))
                 }
+            } catch (e: Exception) {
+                _orderBook.postValue(NetworkResult.Error(e.message))
             }
         }
     }
