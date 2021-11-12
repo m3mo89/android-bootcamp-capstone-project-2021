@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.wizeline.bootcamp.capstone.R
 import com.wizeline.bootcamp.capstone.data.NetworkResult
 import com.wizeline.bootcamp.capstone.data.mapper.OrderBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.mapper.TickerResponseMapper
@@ -19,6 +20,7 @@ import com.wizeline.bootcamp.capstone.databinding.FragmentBookDetailsBinding
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
 import com.wizeline.bootcamp.capstone.domain.TickerDTO
+import com.wizeline.bootcamp.capstone.utils.Constants
 import com.wizeline.bootcamp.capstone.utils.getCryptoName
 
 class BookDetailsFragment : Fragment() {
@@ -156,11 +158,13 @@ class BookDetailsFragment : Fragment() {
     }
 
     private fun showErrorMessage(message: String?) {
-        Toast.makeText(
-            requireContext(),
-            message,
-            Toast.LENGTH_SHORT
-        ).show()
+        var messageToDisplay = message ?: ""
+
+        if (message.equals(Constants.ERROR_MESSAGE)) {
+            messageToDisplay = getString(R.string.error_message)
+        }
+
+        Toast.makeText(requireContext(), messageToDisplay, Toast.LENGTH_SHORT).show()
     }
 
     private fun showLoadingIndicator() {

@@ -11,6 +11,7 @@ import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
 import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
 import com.wizeline.bootcamp.capstone.domain.TickerDTO
+import com.wizeline.bootcamp.capstone.utils.Constants.Companion.ERROR_MESSAGE
 import kotlinx.coroutines.launch
 
 class BookDetailsViewModel(
@@ -44,7 +45,7 @@ class BookDetailsViewModel(
                         _ticker.postValue(NetworkResult.Success(ticker))
                     }
                 } else {
-                    _ticker.postValue(NetworkResult.Error("Unknown issue"))
+                    _ticker.postValue(NetworkResult.Error(ERROR_MESSAGE))
                 }
             } catch (e: Exception) {
                 _ticker.postValue(NetworkResult.Error(e.message))
@@ -69,7 +70,7 @@ class BookDetailsViewModel(
                         _orderBook.postValue(NetworkResult.Success(orderBook))
                     }
                 } else {
-                    _orderBook.postValue(NetworkResult.Error("Unknown issue"))
+                    _orderBook.postValue(NetworkResult.Error(ERROR_MESSAGE))
                 }
             } catch (e: Exception) {
                 _orderBook.postValue(NetworkResult.Error(e.message))

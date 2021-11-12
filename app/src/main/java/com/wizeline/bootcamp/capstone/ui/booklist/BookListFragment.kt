@@ -11,12 +11,14 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wizeline.bootcamp.capstone.R
 import com.wizeline.bootcamp.capstone.data.NetworkResult
 import com.wizeline.bootcamp.capstone.data.mapper.AvailableBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookListBinding
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
 import com.wizeline.bootcamp.capstone.domain.BookDTO
+import com.wizeline.bootcamp.capstone.utils.Constants.Companion.ERROR_MESSAGE
 
 // view holders' height should take 1/7 of the screen
 private const val VIEW_HOLDER_SCREEN_PROPORTION = 1.0 / 7.0
@@ -110,11 +112,13 @@ class BookListFragment : Fragment() {
     }
 
     private fun showErrorMessage(message: String?) {
-        Toast.makeText(
-            requireContext(),
-            message,
-            Toast.LENGTH_SHORT
-        ).show()
+        var messageToDisplay = message ?: ""
+
+        if (message.equals(ERROR_MESSAGE)) {
+            messageToDisplay = getString(R.string.error_message)
+        }
+
+        Toast.makeText(requireContext(), messageToDisplay, Toast.LENGTH_SHORT).show()
     }
 
     private fun showLoadingIndicator() {

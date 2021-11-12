@@ -8,6 +8,7 @@ import com.wizeline.bootcamp.capstone.data.NetworkResult
 import com.wizeline.bootcamp.capstone.data.mapper.AvailableBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
 import com.wizeline.bootcamp.capstone.domain.BookDTO
+import com.wizeline.bootcamp.capstone.utils.Constants.Companion.ERROR_MESSAGE
 import kotlinx.coroutines.launch
 
 class BookListViewModel(
@@ -36,7 +37,7 @@ class BookListViewModel(
                         _result.postValue(NetworkResult.Success(listOfBooks))
                     }
                 } else {
-                    _result.postValue(NetworkResult.Error("Unknown issue"))
+                    _result.postValue(NetworkResult.Error(ERROR_MESSAGE))
                 }
             } catch (e: Exception) {
                 _result.postValue(NetworkResult.Error(e.message))
