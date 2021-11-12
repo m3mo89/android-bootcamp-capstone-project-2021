@@ -20,7 +20,7 @@ class BookListViewModel(
 
     fun requestData() {
         viewModelScope.launch {
-            _result.value = NetworkResult.Loading()
+            _result.postValue(NetworkResult.Loading())
 
             try {
                 val response = availableBooksRepo.getAvailableBooks().body()
