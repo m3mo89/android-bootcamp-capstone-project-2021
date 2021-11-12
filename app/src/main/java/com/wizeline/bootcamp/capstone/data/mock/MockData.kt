@@ -1,7 +1,7 @@
 package com.wizeline.bootcamp.capstone.data.mock
 
 import com.wizeline.bootcamp.capstone.domain.AskDTO
-import com.wizeline.bootcamp.capstone.domain.Bid
+import com.wizeline.bootcamp.capstone.domain.BidDTO
 import com.wizeline.bootcamp.capstone.domain.Book
 import com.wizeline.bootcamp.capstone.domain.Ticker
 
@@ -151,12 +151,12 @@ val mockAsks = listOf(
 )
 
 val mockBids = listOf(
-    Bid(price = "0.07325251", amount = "0.00815501", total = "0.00815503"),
-    Bid(price = "0.07325252", amount = "0.00815502", total = "0.00815503"),
-    Bid(price = "0.07325253", amount = "0.00815503", total = "0.00815503"),
-    Bid(price = "0.07325254", amount = "0.00815504", total = "0.00815503"),
-    Bid(price = "0.07325251", amount = "0.00815501", total = "0.00815503"),
-    Bid(price = "0.07325252", amount = "0.00815502", total = "0.00815503"),
-    Bid(price = "0.07325253", amount = "0.00815503", total = "0.00815503"),
-    Bid(price = "0.07325254", amount = "0.00815504", total = "0.00815503"),
+    BidDTO(price = "0.07325251", amount = "0.00815501", total = "0.00815503"),
+    BidDTO(price = "0.07325252", amount = "0.00815502", total = "0.00815503"),
+    BidDTO(price = "0.07325253", amount = "0.00815503", total = "0.00815503"),
+    BidDTO(price = "0.07325254", amount = "0.00815504", total = "0.00815503"),
+    BidDTO(price = "0.07325251", amount = "0.00815501", total = "0.00815503"),
+    BidDTO(price = "0.07325252", amount = "0.00815502", total = "0.00815503"),
+    BidDTO(price = "0.07325253", amount = "0.00815503", total = "0.00815503"),
+    BidDTO(price = "0.07325254", amount = "0.00815504", total = "0.00815503"),
 )
