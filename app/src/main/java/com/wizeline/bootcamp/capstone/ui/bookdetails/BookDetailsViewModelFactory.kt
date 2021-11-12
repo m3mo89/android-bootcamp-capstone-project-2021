@@ -5,8 +5,7 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.wizeline.bootcamp.capstone.data.mapper.OrderBookAskResponseMapper
-import com.wizeline.bootcamp.capstone.data.mapper.OrderBookBidResponseMapper
+import com.wizeline.bootcamp.capstone.data.mapper.OrderBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.mapper.TickerResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
 import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
@@ -16,8 +15,7 @@ class BookDetailsViewModelFactory(
     private val tickerRepo: TickerRepo,
     private val orderBookRepo: OrderBookRepo,
     private val tickerMapper: TickerResponseMapper,
-    private val orderbookAskMapper: OrderBookAskResponseMapper,
-    private val orderbookBidMapper: OrderBookBidResponseMapper,
+    private val orderbookMapper: OrderBookResponseMapper,
     defaultArgs: Bundle? = null
 ) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
     override fun <T : ViewModel> create(
@@ -27,8 +25,7 @@ class BookDetailsViewModelFactory(
             tickerRepo,
             orderBookRepo,
             tickerMapper,
-            orderbookAskMapper,
-            orderbookBidMapper
+            orderbookMapper,
         ) as T
     }
 }
