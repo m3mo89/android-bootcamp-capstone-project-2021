@@ -9,4 +9,5 @@
     <string name="total">Total </string>
     <string name="sell_orders">Posturas de Venta</string>
     <string name="to">%s a %s</string>
+    <string name="error_message">Se produjo un error al obtener los datos</string>
 </resources>
