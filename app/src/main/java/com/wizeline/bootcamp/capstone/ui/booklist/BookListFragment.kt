@@ -4,16 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wizeline.bootcamp.capstone.data.NetworkResult
 import com.wizeline.bootcamp.capstone.data.mapper.AvailableBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookListBinding
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
+import com.wizeline.bootcamp.capstone.domain.Book
 
 // view holders' height should take 1/7 of the screen
 private const val VIEW_HOLDER_SCREEN_PROPORTION = 1.0 / 7.0
@@ -51,7 +54,7 @@ class BookListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initAdapter()
         requestData()
-        observeBookList()
+        observeResult()
     }
 
     private fun initAdapter() {
@@ -78,9 +81,47 @@ class BookListFragment : Fragment() {
         viewModel.requestData()
     }
 
-    private fun observeBookList() {
-        viewModel.bookList.observe(viewLifecycleOwner, {
-            bookListAdapter.submitList(it)
+    private fun observeResult() {
+        viewModel.result.observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is NetworkResult.Success -> resultSuccess(result.data)
+                is NetworkResult.Error -> resultError(result.message)
+                is NetworkResult.Loading -> resultLoading()
+            }
         })
+    }
+
+    private fun resultSuccess(books: List<Book>?) {
+        hideLoadingIndicator()
+        bindData(books)
+    }
+
+    private fun resultError(message: String?) {
+        hideLoadingIndicator()
+        showErrorMessage(message)
+    }
+
+    private fun resultLoading() {
+        showLoadingIndicator()
+    }
+
+    private fun bindData(books: List<Book>?) {
+        bookListAdapter.submitList(books)
+    }
+
+    private fun showErrorMessage(message: String?) {
+        Toast.makeText(
+            requireContext(),
+            message,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun showLoadingIndicator() {
+        binding.loadingIndicator.visibility = View.VISIBLE
+    }
+
+    private fun hideLoadingIndicator() {
+        binding.loadingIndicator.visibility = View.GONE
     }
 }
