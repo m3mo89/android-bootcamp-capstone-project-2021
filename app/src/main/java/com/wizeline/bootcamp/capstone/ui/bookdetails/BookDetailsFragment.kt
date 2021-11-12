@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.wizeline.bootcamp.capstone.data.mapper.OrderBookAskResponseMapper
-import com.wizeline.bootcamp.capstone.data.mapper.OrderBookBidResponseMapper
+import com.wizeline.bootcamp.capstone.data.NetworkResult
+import com.wizeline.bootcamp.capstone.data.mapper.OrderBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.mapper.TickerResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
 import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookDetailsBinding
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
+import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
+import com.wizeline.bootcamp.capstone.domain.Ticker
 import com.wizeline.bootcamp.capstone.utils.getCryptoName
 
 class BookDetailsFragment : Fragment() {
@@ -31,10 +35,9 @@ class BookDetailsFragment : Fragment() {
     private val tickerService = NetworkingModule.provideTickerService(retrofitClient)
     private val orderBookService = NetworkingModule.provideOrderBookService(retrofitClient)
     private val tickerRepo: TickerRepo = TickerRepo(tickerService)
-    private val tickerMapper = TickerResponseMapper()
-    private val orderbookAskMapper = OrderBookAskResponseMapper()
-    private val orderbookBidMapper = OrderBookBidResponseMapper()
     private val orderBookRepo: OrderBookRepo = OrderBookRepo(orderBookService)
+    private val tickerMapper = TickerResponseMapper()
+    private val orderbookMapper = OrderBookResponseMapper()
 
     private val viewModel: BookDetailsViewModel by viewModels {
         BookDetailsViewModelFactory(
@@ -42,8 +45,7 @@ class BookDetailsFragment : Fragment() {
             tickerRepo,
             orderBookRepo,
             tickerMapper,
-            orderbookAskMapper,
-            orderbookBidMapper
+            orderbookMapper,
         )
     }
 
@@ -65,8 +67,7 @@ class BookDetailsFragment : Fragment() {
             initAdapters()
             requestData(bookId)
             observeTicker()
-            observeAskList()
-            observeBidList()
+            observeOrderBook()
         }
     }
 
@@ -101,35 +102,82 @@ class BookDetailsFragment : Fragment() {
     }
 
     private fun observeTicker() {
-        viewModel.ticker.observe(viewLifecycleOwner, {
-            binding.book.text = it?.id
-            binding.cryptoName.text = it?.cryptoName.getCryptoName(requireContext())
-            binding.bookPrice.text = it?.lastPrice
-            binding.dayHighLow.text = getDayHighLowText(it?.lowPrice, it?.highPrice)
-            binding.askPriceValue.text = it?.ask
-            binding.bidPriceValue.text = it?.bid
-            Glide.with(binding.root).load(it?.spriteUrl).into(binding.bookSpriteUrl)
+        viewModel.ticker.observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is NetworkResult.Success -> tickerResultSuccess(result.data)
+                is NetworkResult.Error -> resultError(result.message)
+                is NetworkResult.Loading -> resultLoading()
+            }
         })
     }
 
-    private fun getDayHighLowText(lowPrice:String?, highPrice:String?): String
-    {
+    private fun observeOrderBook() {
+        viewModel.orderBook.observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is NetworkResult.Success -> orderBookResultSuccess(result.data)
+                is NetworkResult.Error -> resultError(result.message)
+                is NetworkResult.Loading -> resultLoading()
+            }
+        })
+    }
+
+    private fun tickerResultSuccess(ticker: Ticker?) {
+        hideLoadingIndicator()
+        bindTickerData(ticker)
+    }
+
+    private fun orderBookResultSuccess(orderBook: OrderBookDTO?) {
+        hideLoadingIndicator()
+        bindOrderBookData(orderBook)
+    }
+
+    private fun resultError(message: String?) {
+        hideLoadingIndicator()
+        showErrorMessage(message)
+    }
+
+    private fun resultLoading() {
+        showLoadingIndicator()
+    }
+
+    private fun bindTickerData(ticker: Ticker?) {
+        binding.book.text = ticker?.id
+        binding.cryptoName.text = ticker?.cryptoName.getCryptoName(requireContext())
+        binding.bookPrice.text = ticker?.lastPrice
+        binding.dayHighLow.text = getDayHighLowText(ticker?.lowPrice, ticker?.highPrice)
+        binding.askPriceValue.text = ticker?.ask
+        binding.bidPriceValue.text = ticker?.bid
+        Glide.with(binding.root).load(ticker?.spriteUrl).into(binding.bookSpriteUrl)
+    }
+
+    private fun bindOrderBookData(orderBook: OrderBookDTO?) {
+        askListAdapter.submitList(orderBook?.asks)
+        bidListAdapter.submitList(orderBook?.bids)
+    }
+
+    private fun showErrorMessage(message: String?) {
+        Toast.makeText(
+            requireContext(),
+            message,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun showLoadingIndicator() {
+        if (!binding.loadingIndicator.isVisible)
+            binding.loadingIndicator.visibility = View.VISIBLE
+    }
+
+    private fun hideLoadingIndicator() {
+        if (binding.loadingIndicator.isVisible)
+            binding.loadingIndicator.visibility = View.GONE
+    }
+
+    private fun getDayHighLowText(lowPrice: String?, highPrice: String?): String {
         if (lowPrice.isNullOrEmpty() || highPrice.isNullOrEmpty()) {
-            return  ""
+            return ""
         }
 
         return "$lowPrice - $highPrice"
-    }
-
-    private fun observeAskList() {
-        viewModel.askList.observe(viewLifecycleOwner, {
-            askListAdapter.submitList(it)
-        })
-    }
-
-    private fun observeBidList() {
-        viewModel.bidList.observe(viewLifecycleOwner, {
-            bidListAdapter.submitList(it)
-        })
     }
 }
