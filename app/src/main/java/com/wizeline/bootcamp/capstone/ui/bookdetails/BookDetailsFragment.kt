@@ -143,18 +143,23 @@ class BookDetailsFragment : Fragment() {
     }
 
     private fun bindTickerData(ticker: TickerDTO?) {
-        binding.book.text = ticker?.id
-        binding.cryptoName.text = ticker?.cryptoName.getCryptoName(requireContext())
-        binding.bookPrice.text = ticker?.lastPrice
-        binding.dayHighLow.text = getDayHighLowText(ticker?.lowPrice, ticker?.highPrice)
-        binding.askPriceValue.text = ticker?.ask
-        binding.bidPriceValue.text = ticker?.bid
-        Glide.with(binding.root).load(ticker?.spriteUrl).into(binding.bookSpriteUrl)
+        ticker?.let {
+            binding.book.text = it.id
+            binding.cryptoName.text = it.cryptoName.getCryptoName(requireContext())
+            binding.bookPrice.text = it.lastPrice
+            binding.dayHighLow.text = getDayHighLowText(it.lowPrice, it.highPrice)
+            binding.askPriceValue.text = it.ask
+            binding.bidPriceValue.text = it.bid
+
+            Glide.with(binding.root).load(it.spriteUrl).into(binding.bookSpriteUrl)
+        }
     }
 
     private fun bindOrderBookData(orderBook: OrderBookDTO?) {
-        askListAdapter.submitList(orderBook?.asks)
-        bidListAdapter.submitList(orderBook?.bids)
+        orderBook?.let {
+            askListAdapter.submitList(it.asks)
+            bidListAdapter.submitList(it.bids)
+        }
     }
 
     private fun showErrorMessage(message: String?) {
