@@ -28,8 +28,8 @@ fun String?.getCryptoName(context: Context): String {
     var from = this?.substringBefore(Constants.UNDERSCORE_DELIMITER)
     var to = this?.substringAfter(Constants.UNDERSCORE_DELIMITER)
 
-    from = mapOfCoinNames.get(from) ?: ""
-    to = mapOfCoinNames.get(to) ?: ""
+    from = mapOfCoinNames.get(from).orEmpty()
+    to = mapOfCoinNames.get(to).orEmpty()
 
     if (from.isNullOrEmpty() || to.isNullOrEmpty()) {
         return ""

@@ -158,7 +158,7 @@ class BookDetailsFragment : Fragment() {
     }
 
     private fun showErrorMessage(message: String?) {
-        var messageToDisplay = message ?: ""
+        var messageToDisplay = message.orEmpty()
 
         if (message.equals(Constants.ERROR_MESSAGE)) {
             messageToDisplay = getString(R.string.error_message)
