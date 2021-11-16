@@ -36,11 +36,11 @@ class BookListFragment : Fragment() {
     private val retrofitClient = NetworkingModule.provideRetrofitClient()
     private val availableBooksService =
         NetworkingModule.provideAvailableBooksService(retrofitClient)
-    private val repo: AvailableBooksRepo = AvailableBooksRepo(availableBooksService)
+    private val availableBooksRepo: AvailableBooksRepo = AvailableBooksRepo(availableBooksService)
     private val booksMapper = AvailableBookResponseMapper()
 
     private val viewModel: BookListViewModel by viewModels {
-        BookListViewModelFactory(this, repo, booksMapper)
+        BookListViewModelFactory(this, availableBooksRepo, booksMapper)
     }
 
     override fun onCreateView(
