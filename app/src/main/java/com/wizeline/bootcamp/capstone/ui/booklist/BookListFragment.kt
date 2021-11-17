@@ -4,14 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.wizeline.bootcamp.capstone.data.mock.mockBooks
+import com.wizeline.bootcamp.capstone.R
+import com.wizeline.bootcamp.capstone.data.NetworkResult
+import com.wizeline.bootcamp.capstone.data.mapper.AvailableBookResponseMapper
+import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookListBinding
+import com.wizeline.bootcamp.capstone.di.NetworkingModule
+import com.wizeline.bootcamp.capstone.domain.BookDTO
+import com.wizeline.bootcamp.capstone.utils.Constants.Companion.ERROR_MESSAGE
 
 // view holders' height should take 1/7 of the screen
 private const val VIEW_HOLDER_SCREEN_PROPORTION = 1.0 / 7.0
@@ -23,12 +30,18 @@ class BookListFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentBookListBinding
-
     private lateinit var navController: NavController
-
     private lateinit var bookListAdapter: BookListAdapter
 
-    private lateinit var viewModel: BookListViewModel
+    private val retrofitClient = NetworkingModule.provideRetrofitClient()
+    private val availableBooksService =
+        NetworkingModule.provideAvailableBooksService(retrofitClient)
+    private val availableBooksRepo: AvailableBooksRepo = AvailableBooksRepo(availableBooksService)
+    private val booksMapper = AvailableBookResponseMapper()
+
+    private val viewModel: BookListViewModel by viewModels {
+        BookListViewModelFactory(this, availableBooksRepo, booksMapper)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,19 +53,20 @@ class BookListFragment : Fragment() {
             .root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BookListViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initAdapter()
+        requestData()
+        observeResult()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    private fun initAdapter() {
+        navController = findNavController()
         bookListAdapter = BookListAdapter { bookId ->
             BookListFragmentDirections
                 .toBookDetailsFragment(bookId)
                 .let { navController.navigate(it) }
         }
-        navController = findNavController()
+
         binding.bookList.run {
             adapter = bookListAdapter
             layoutManager = object : LinearLayoutManager(requireContext()) {
@@ -63,7 +77,55 @@ class BookListFragment : Fragment() {
             }
             setHasFixedSize(true)
         }
+    }
 
-        bookListAdapter.submitList(mockBooks)
+    private fun requestData() {
+        viewModel.requestData()
+    }
+
+    private fun observeResult() {
+        viewModel.result.observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is NetworkResult.Success -> resultSuccess(result.data)
+                is NetworkResult.Error -> resultError(result.message)
+                is NetworkResult.Loading -> resultLoading()
+            }
+        })
+    }
+
+    private fun resultSuccess(books: List<BookDTO>?) {
+        hideLoadingIndicator()
+        bindData(books)
+    }
+
+    private fun resultError(message: String?) {
+        hideLoadingIndicator()
+        showErrorMessage(message)
+    }
+
+    private fun resultLoading() {
+        showLoadingIndicator()
+    }
+
+    private fun bindData(books: List<BookDTO>?) {
+        bookListAdapter.submitList(books)
+    }
+
+    private fun showErrorMessage(message: String?) {
+        var messageToDisplay = message.orEmpty()
+
+        if (message.equals(ERROR_MESSAGE)) {
+            messageToDisplay = getString(R.string.error_message)
+        }
+
+        Toast.makeText(requireContext(), messageToDisplay, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showLoadingIndicator() {
+        binding.loadingIndicator.visibility = View.VISIBLE
+    }
+
+    private fun hideLoadingIndicator() {
+        binding.loadingIndicator.visibility = View.GONE
     }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Crypto Challenge</string>
+    <string name="ask">Ask</string>
+    <string name="bid">Bid</string>
+    <string name="buy_orders">Posturas de Compra</string>
+    <string name="price">Precio </string>
+    <string name="amount">Monto </string>
+    <string name="total">Total </string>
+    <string name="sell_orders">Posturas de Venta</string>
+    <string name="to">%s a %s</string>
+    <string name="error_message">Se produjo un error al obtener los datos</string>
+</resources>

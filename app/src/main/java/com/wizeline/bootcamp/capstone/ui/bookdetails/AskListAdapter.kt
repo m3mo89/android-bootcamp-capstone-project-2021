@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.wizeline.bootcamp.capstone.databinding.ItemAskBinding
-import com.wizeline.bootcamp.capstone.domain.Ask
+import com.wizeline.bootcamp.capstone.domain.AskDTO
 
-class AskListAdapter : ListAdapter<Ask, AskListAdapter.AskViewHolder>(DIFF_CALLBACK) {
+class AskListAdapter : ListAdapter<AskDTO, AskListAdapter.AskViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AskViewHolder {
 
         return LayoutInflater.from(parent.context)
@@ -24,7 +24,7 @@ class AskListAdapter : ListAdapter<Ask, AskListAdapter.AskViewHolder>(DIFF_CALLB
         private val binding: ItemAskBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(ask: Ask) {
+        fun bind(ask: AskDTO) {
             binding.askAmount.text = ask.amount
             binding.askPrice.text = ask.price
             binding.askTotal.text = ask.total
@@ -32,11 +32,11 @@ class AskListAdapter : ListAdapter<Ask, AskListAdapter.AskViewHolder>(DIFF_CALLB
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Ask>() {
-            override fun areItemsTheSame(oldItem: Ask, newItem: Ask): Boolean =
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AskDTO>() {
+            override fun areItemsTheSame(oldItem: AskDTO, newItem: AskDTO): Boolean =
                 oldItem.amount == newItem.amount && oldItem.price == newItem.price
 
-            override fun areContentsTheSame(oldItem: Ask, newItem: Ask): Boolean =
+            override fun areContentsTheSame(oldItem: AskDTO, newItem: AskDTO): Boolean =
                 oldItem == newItem
         }
     }

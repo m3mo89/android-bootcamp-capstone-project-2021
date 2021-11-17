@@ -7,5 +7,6 @@
     <string name="amount">Amount </string>
     <string name="total">Total </string>
     <string name="sell_orders">Sell Orders</string>
-    <string name="mainfragment">MainFragment</string>
+    <string name="to">%s to %s</string>
+    <string name="error_message">An error occurred while getting the data</string>
 </resources>
