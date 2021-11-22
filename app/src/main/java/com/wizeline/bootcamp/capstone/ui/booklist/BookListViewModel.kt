@@ -1,47 +1,10 @@
 package com.wizeline.bootcamp.capstone.ui.booklist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.wizeline.bootcamp.capstone.data.NetworkResult
-import com.wizeline.bootcamp.capstone.data.mapper.AvailableBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
-import com.wizeline.bootcamp.capstone.domain.BookDTO
-import com.wizeline.bootcamp.capstone.utils.Constants.Companion.ERROR_MESSAGE
-import kotlinx.coroutines.launch
 
 class BookListViewModel(
-    private val availableBooksRepo: AvailableBooksRepo,
-    private val booksMapper: AvailableBookResponseMapper,
+    private val availableBooksRepo: AvailableBooksRepo
 ) : ViewModel() {
-    private var _result: MutableLiveData<NetworkResult<List<BookDTO>>> =
-        MutableLiveData<NetworkResult<List<BookDTO>>>()
-    val result: LiveData<NetworkResult<List<BookDTO>>> = _result
-
-    fun requestData() {
-        viewModelScope.launch {
-            _result.postValue(NetworkResult.Loading())
-
-            try {
-                val response = availableBooksRepo.getAvailableBooks().body()
-
-                val success = response?.success ?: false
-
-                if (success) {
-                    val payload = response?.payload
-
-                    if (payload != null) {
-                        val listOfBooks = booksMapper.mapList(payload)
-
-                        _result.postValue(NetworkResult.Success(listOfBooks))
-                    }
-                } else {
-                    _result.postValue(NetworkResult.Error(ERROR_MESSAGE))
-                }
-            } catch (e: Exception) {
-                _result.postValue(NetworkResult.Error(e.message))
-            }
-        }
-    }
+    val result = availableBooksRepo.getAvailableBooks()
 }
