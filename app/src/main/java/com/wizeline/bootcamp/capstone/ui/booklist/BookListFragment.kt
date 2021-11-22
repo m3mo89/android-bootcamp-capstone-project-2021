@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wizeline.bootcamp.capstone.R
 import com.wizeline.bootcamp.capstone.data.NetworkResult
-import com.wizeline.bootcamp.capstone.data.mapper.AvailableBookResponseMapper
-import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookListBinding
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
 import com.wizeline.bootcamp.capstone.domain.BookDTO
@@ -36,11 +34,15 @@ class BookListFragment : Fragment() {
     private val retrofitClient = NetworkingModule.provideRetrofitClient()
     private val availableBooksService =
         NetworkingModule.provideAvailableBooksService(retrofitClient)
-    private val availableBooksRepo: AvailableBooksRepo = AvailableBooksRepo(availableBooksService)
-    private val booksMapper = AvailableBookResponseMapper()
+    private val database = NetworkingModule.provideDatabase(NetworkingModule.application)
+    private val bookDAO = NetworkingModule.provideBookDao(database)
+    private val bookRemoteDataSource =
+        NetworkingModule.provideBookRemoteDataSource(availableBooksService)
+    private val availableBooksRepo =
+        NetworkingModule.provideRepository(bookRemoteDataSource, bookDAO)
 
     private val viewModel: BookListViewModel by viewModels {
-        BookListViewModelFactory(this, availableBooksRepo, booksMapper)
+        BookListViewModelFactory(this, availableBooksRepo)
     }
 
     override fun onCreateView(
@@ -55,7 +57,6 @@ class BookListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initAdapter()
-        requestData()
         observeResult()
     }
 
@@ -77,10 +78,6 @@ class BookListFragment : Fragment() {
             }
             setHasFixedSize(true)
         }
-    }
-
-    private fun requestData() {
-        viewModel.requestData()
     }
 
     private fun observeResult() {
