@@ -1,11 +1,11 @@
 package com.wizeline.bootcamp.capstone.data.mapper
 
-import com.wizeline.bootcamp.capstone.data.entities.Book
+import com.wizeline.bootcamp.capstone.data.entities.BookEntity
 import com.wizeline.bootcamp.capstone.data.mock.AvailableBook
 import com.wizeline.bootcamp.capstone.domain.BookDTO
 import com.wizeline.bootcamp.capstone.utils.Constants
 
-fun AvailableBook.toLocal() = Book(
+fun AvailableBook.toLocal() = BookEntity(
     book = book,
     minimumAmount = minimumAmount,
     maximumAmount = maximumAmount,
@@ -15,7 +15,7 @@ fun AvailableBook.toLocal() = Book(
     maximumValue = maximumValue
 )
 
-fun Book.fromLocal() = BookDTO(
+fun BookEntity.fromLocal() = BookDTO(
     id = book,
     name = book,
     spriteUrl = book.let {
