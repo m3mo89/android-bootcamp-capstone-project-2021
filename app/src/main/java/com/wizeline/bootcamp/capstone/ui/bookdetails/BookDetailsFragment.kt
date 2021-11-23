@@ -13,9 +13,7 @@ import com.bumptech.glide.Glide
 import com.wizeline.bootcamp.capstone.R
 import com.wizeline.bootcamp.capstone.data.NetworkResult
 import com.wizeline.bootcamp.capstone.data.mapper.OrderBookResponseMapper
-import com.wizeline.bootcamp.capstone.data.mapper.TickerResponseMapper
 import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
-import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookDetailsBinding
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
@@ -34,20 +32,26 @@ class BookDetailsFragment : Fragment() {
     private lateinit var bidListAdapter: BidListAdapter
 
     private val retrofitClient = NetworkingModule.provideRetrofitClient()
-    private val tickerService = NetworkingModule.provideTickerService(retrofitClient)
+    private val tickerService =
+        NetworkingModule.provideTickerService(retrofitClient)
+    private val database = NetworkingModule.provideDatabase(NetworkingModule.application)
+    private val tickerDAO = NetworkingModule.provideTickerDao(database)
+    private val tickerRemoteDataSource =
+        NetworkingModule.provideTickerRemoteDataSource(tickerService)
+    private val tickerRepo =
+        NetworkingModule.provideTickerRepository(tickerRemoteDataSource, tickerDAO)
+
     private val orderBookService = NetworkingModule.provideOrderBookService(retrofitClient)
-    private val tickerRepo: TickerRepo = TickerRepo(tickerService)
     private val orderBookRepo: OrderBookRepo = OrderBookRepo(orderBookService)
-    private val tickerMapper = TickerResponseMapper()
-    private val orderbookMapper = OrderBookResponseMapper()
+    private val orderBookMapper = OrderBookResponseMapper()
+
 
     private val viewModel: BookDetailsViewModel by viewModels {
         BookDetailsViewModelFactory(
             this,
             tickerRepo,
             orderBookRepo,
-            tickerMapper,
-            orderbookMapper,
+            orderBookMapper,
         )
     }
 
