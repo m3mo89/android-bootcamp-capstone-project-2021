@@ -3,8 +3,11 @@ package com.wizeline.bootcamp.capstone.di
 import android.app.Application
 import com.wizeline.bootcamp.capstone.data.local.AppDatabase
 import com.wizeline.bootcamp.capstone.data.local.BookDAO
+import com.wizeline.bootcamp.capstone.data.local.TickerDAO
 import com.wizeline.bootcamp.capstone.data.remote.BookRemoteDataSource
+import com.wizeline.bootcamp.capstone.data.remote.TickerRemoteDataSource
 import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
+import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
 import com.wizeline.bootcamp.capstone.data.services.AvailableBooksService
 import com.wizeline.bootcamp.capstone.data.services.OrderBookService
 import com.wizeline.bootcamp.capstone.data.services.TickerService
@@ -72,9 +75,21 @@ object NetworkingModule {
     fun provideBookDao(db: AppDatabase) =
         db.bookDao()
 
-    fun provideRepository(
+    fun provideAvailableBooksRepository(
         remoteDataSource: BookRemoteDataSource,
         localDataSource: BookDAO
     ) =
         AvailableBooksRepo(remoteDataSource, localDataSource)
+
+    fun provideTickerRemoteDataSource(tickerService: TickerService) =
+        TickerRemoteDataSource(tickerService)
+
+    fun provideTickerDao(db: AppDatabase) =
+        db.tickerDao()
+
+    fun provideTickerRepository(
+        remoteDataSource: TickerRemoteDataSource,
+        localDataSource: TickerDAO
+    ) =
+        TickerRepo(remoteDataSource, localDataSource)
 }

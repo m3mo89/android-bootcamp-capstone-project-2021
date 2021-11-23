@@ -39,7 +39,7 @@ class BookListFragment : Fragment() {
     private val bookRemoteDataSource =
         NetworkingModule.provideBookRemoteDataSource(availableBooksService)
     private val availableBooksRepo =
-        NetworkingModule.provideRepository(bookRemoteDataSource, bookDAO)
+        NetworkingModule.provideAvailableBooksRepository(bookRemoteDataSource, bookDAO)
 
     private val viewModel: BookListViewModel by viewModels {
         BookListViewModelFactory(this, availableBooksRepo)
