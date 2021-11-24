@@ -16,8 +16,8 @@ class TickerRepo(
         {
             val ticker = localDataSource.getTickerByBook(book)
 
-            ticker.map {
-                it.let { it.fromLocal() }
+            ticker.let { ticker ->
+                ticker.map { it.fromLocal() }
             }
         },
         networkCall = { remoteDataSource.getTickerByBook(book) },

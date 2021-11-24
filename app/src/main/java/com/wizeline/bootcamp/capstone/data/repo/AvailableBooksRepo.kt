@@ -14,9 +14,11 @@ class AvailableBooksRepo(
     fun getAvailableBooks() = performGetOperation(
         databaseQuery =
         {
-            localDataSource.getAll().map {
-                it.map { book ->
-                    book.fromLocal()
+            val books = localDataSource.getAll()
+
+            books.let {
+                books.map { book ->
+                    book.map { it.fromLocal() }
                 }
             }
         },
