@@ -13,7 +13,7 @@ import com.wizeline.bootcamp.capstone.data.entities.TickerEntity
 
 @Database(
     entities = [BookEntity::class, TickerEntity::class, OrderBookEntity::class],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 @TypeConverters(AskConverter::class, BidConverter::class)

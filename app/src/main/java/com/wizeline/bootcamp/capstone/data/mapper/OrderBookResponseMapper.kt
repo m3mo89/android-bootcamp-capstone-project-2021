@@ -7,13 +7,12 @@ import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
 val askMapper = OrderBookAskResponseMapper()
 val bidMapper = OrderBookBidResponseMapper()
 
-fun OrderBook.toLocal() = OrderBookEntity(
+fun OrderBook.toLocal(book: String) = OrderBookEntity(
     asks = askMapper.mapList(asks),
     bids = bidMapper.mapList(bids),
     updatedAt = updatedAt,
     sequence = sequence,
-    id = 1,
-    book = "xrp_mxn"
+    book = book
 )
 
 fun OrderBookEntity.fromLocal() = OrderBookDTO(

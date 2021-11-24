@@ -8,7 +8,7 @@ import com.wizeline.bootcamp.capstone.domain.BidDTO
 @Entity(tableName = "orders")
 data class OrderBookEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
     val book: String,
     val asks: List<AskDTO>,
     val bids: List<BidDTO>,

@@ -27,7 +27,7 @@ class OrderBookRepo(
             val payload = it.payload
 
             if (payload != null) {
-                localDataSource.insert(payload.toLocal())
+                localDataSource.insert(payload.toLocal(book))
             }
         }
     )
