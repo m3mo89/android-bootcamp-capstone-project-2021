@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.wizeline.bootcamp.capstone.R
 import com.wizeline.bootcamp.capstone.data.NetworkResult
-import com.wizeline.bootcamp.capstone.data.mapper.OrderBookResponseMapper
-import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookDetailsBinding
 import com.wizeline.bootcamp.capstone.di.NetworkingModule
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
@@ -42,16 +40,17 @@ class BookDetailsFragment : Fragment() {
         NetworkingModule.provideTickerRepository(tickerRemoteDataSource, tickerDAO)
 
     private val orderBookService = NetworkingModule.provideOrderBookService(retrofitClient)
-    private val orderBookRepo: OrderBookRepo = OrderBookRepo(orderBookService)
-    private val orderBookMapper = OrderBookResponseMapper()
-
+    private val orderBookDAO = NetworkingModule.provideOrderBookDao(database)
+    private val orderBookRemoteDataSource =
+        NetworkingModule.provideOrderBookRemoteDataSource(orderBookService)
+    private val orderBookRepo =
+        NetworkingModule.provideOrderBookRepository(orderBookRemoteDataSource, orderBookDAO)
 
     private val viewModel: BookDetailsViewModel by viewModels {
         BookDetailsViewModelFactory(
             this,
             tickerRepo,
             orderBookRepo,
-            orderBookMapper,
         )
     }
 
@@ -104,7 +103,6 @@ class BookDetailsFragment : Fragment() {
 
     private fun requestData(bookId: String) {
         viewModel.requestData(bookId)
-        viewModel.requestOrderBookData(bookId)
     }
 
     private fun observeTicker() {
