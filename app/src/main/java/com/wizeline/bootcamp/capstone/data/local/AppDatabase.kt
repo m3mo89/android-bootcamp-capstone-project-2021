@@ -4,15 +4,26 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.wizeline.bootcamp.capstone.data.converters.AskConverter
+import com.wizeline.bootcamp.capstone.data.converters.BidConverter
 import com.wizeline.bootcamp.capstone.data.entities.BookEntity
+import com.wizeline.bootcamp.capstone.data.entities.OrderBookEntity
 import com.wizeline.bootcamp.capstone.data.entities.TickerEntity
 
-@Database(entities = [BookEntity::class, TickerEntity::class], version = 3, exportSchema = false)
+@Database(
+    entities = [BookEntity::class, TickerEntity::class, OrderBookEntity::class],
+    version = 4,
+    exportSchema = false
+)
+@TypeConverters(AskConverter::class, BidConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun bookDao(): BookDAO
 
     abstract fun tickerDao(): TickerDAO
+
+    abstract fun orderBookDao(): OrderBookDAO
 
     companion object {
         @Volatile
