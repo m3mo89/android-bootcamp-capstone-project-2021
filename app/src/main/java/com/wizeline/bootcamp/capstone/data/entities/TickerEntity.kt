@@ -6,13 +6,13 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "ticker")
 data class TickerEntity(
     @PrimaryKey
-    var book: String,
-    var volume: String,
-    var high: String,
-    var last: String,
-    var low: String,
-    var vwap: String,
-    var ask: String,
-    var bid: String,
-    var createdAt: String
+    val book: String,
+    val volume: String,
+    val high: String,
+    val last: String,
+    val low: String,
+    val vwap: String,
+    val ask: String,
+    val bid: String,
+    val createdAt: String
 )
