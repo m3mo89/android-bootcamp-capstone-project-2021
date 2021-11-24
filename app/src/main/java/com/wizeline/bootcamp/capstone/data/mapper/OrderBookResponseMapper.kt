@@ -1,16 +1,22 @@
 package com.wizeline.bootcamp.capstone.data.mapper
 
+import com.wizeline.bootcamp.capstone.data.entities.OrderBookEntity
 import com.wizeline.bootcamp.capstone.data.mock.OrderBook
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
 
-class OrderBookResponseMapper : Mapper<OrderBook, OrderBookDTO> {
-    override fun map(from: OrderBook): OrderBookDTO {
-        val askMapper = OrderBookAskResponseMapper()
-        val bidMapper = OrderBookBidResponseMapper()
+val askMapper = OrderBookAskResponseMapper()
+val bidMapper = OrderBookBidResponseMapper()
 
-        return OrderBookDTO(
-            asks = askMapper.mapList(from.asks),
-            bids = bidMapper.mapList(from.bids),
-        )
-    }
-}
+fun OrderBook.toLocal() = OrderBookEntity(
+    asks = askMapper.mapList(asks),
+    bids = bidMapper.mapList(bids),
+    updatedAt = updatedAt,
+    sequence = sequence,
+    id = 1,
+    book = "xrp_mxn"
+)
+
+fun OrderBookEntity.fromLocal() = OrderBookDTO(
+    asks = asks,
+    bids = bids
+)
