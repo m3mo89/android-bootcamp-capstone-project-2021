@@ -2,8 +2,9 @@ package com.wizeline.bootcamp.capstone.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.wizeline.bootcamp.capstone.utils.TableNames
 
-@Entity(tableName = "ticker")
+@Entity(tableName = "${TableNames.TICKER}")
 data class TickerEntity(
     @PrimaryKey
     val book: String,

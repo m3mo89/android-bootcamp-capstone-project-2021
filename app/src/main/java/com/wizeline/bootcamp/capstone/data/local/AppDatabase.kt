@@ -10,6 +10,7 @@ import com.wizeline.bootcamp.capstone.data.converters.BidConverter
 import com.wizeline.bootcamp.capstone.data.entities.BookEntity
 import com.wizeline.bootcamp.capstone.data.entities.OrderBookEntity
 import com.wizeline.bootcamp.capstone.data.entities.TickerEntity
+import com.wizeline.bootcamp.capstone.utils.TableNames
 
 @Database(
     entities = [BookEntity::class, TickerEntity::class, OrderBookEntity::class],
@@ -37,7 +38,7 @@ abstract class AppDatabase : RoomDatabase() {
             }
 
         private fun buildDatabase(appContext: Context) =
-            Room.databaseBuilder(appContext, AppDatabase::class.java, "crypto_challenge")
+            Room.databaseBuilder(appContext, AppDatabase::class.java, "${TableNames.DATABASE_NAME}")
                 .fallbackToDestructiveMigration()
                 .build()
     }
