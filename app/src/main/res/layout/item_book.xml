@@ -9,50 +9,38 @@
     app:cardCornerRadius="@dimen/_4dp"
     app:cardElevation="@dimen/_4dp">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/_10dp"
-        android:weightSum="2">
+        android:padding="@dimen/_10dp">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <ImageView
+            android:id="@+id/book_sprite_url"
+            android:layout_width="@dimen/_80dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="false"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toStartOf="@id/book_id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/book_id"
+            style="@style/Theme.CryptoChallenge.AccentTextAppearance.TitleTextAppearance"
             android:layout_width="@dimen/_0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingTop="@dimen/_8dp">
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/book_sprite_url"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/book_sprite_url"
-                android:layout_width="@dimen/_80dp"
-                android:layout_height="@dimen/_80dp" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <TextView
+            android:id="@+id/book_name"
+            style="@style/Theme.CryptoChallenge.TertiaryTextAppearance"
             android:layout_width="@dimen/_0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/_0dp"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/book_id"
-                style="@style/Theme.CryptoChallenge.AccentTextAppearance.TitleTextAppearance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center|bottom" />
-
-            <TextView
-                android:id="@+id/book_name"
-                style="@style/Theme.CryptoChallenge.TertiaryTextAppearance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/book_sprite_url"
+            app:layout_constraintTop_toBottomOf="@id/book_id" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
