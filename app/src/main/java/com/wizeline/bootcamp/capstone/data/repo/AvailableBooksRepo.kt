@@ -6,8 +6,11 @@ import com.wizeline.bootcamp.capstone.data.mapper.fromLocal
 import com.wizeline.bootcamp.capstone.data.mapper.toLocal
 import com.wizeline.bootcamp.capstone.data.remote.BookRemoteDataSource
 import com.wizeline.bootcamp.capstone.utils.performGetOperation
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AvailableBooksRepo(
+@Singleton
+class AvailableBooksRepo @Inject constructor(
     private val remoteDataSource: BookRemoteDataSource,
     private val localDataSource: BookDAO
 ) {

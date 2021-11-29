@@ -6,8 +6,11 @@ import com.wizeline.bootcamp.capstone.data.mapper.fromLocal
 import com.wizeline.bootcamp.capstone.data.mapper.toLocal
 import com.wizeline.bootcamp.capstone.data.remote.TickerRemoteDataSource
 import com.wizeline.bootcamp.capstone.utils.performGetOperation
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class TickerRepo(
+@Singleton
+class TickerRepo @Inject constructor (
     private val remoteDataSource: TickerRemoteDataSource,
     private val localDataSource: TickerDAO
 ) {
