@@ -9,8 +9,11 @@ import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
 import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
 import com.wizeline.bootcamp.capstone.domain.TickerDTO
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class BookDetailsViewModel(
+@HiltViewModel
+class BookDetailsViewModel @Inject constructor(
     private val tickerRepo: TickerRepo,
     private val orderBookRepo: OrderBookRepo,
 ) : ViewModel() {
