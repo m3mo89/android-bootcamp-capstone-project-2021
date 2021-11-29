@@ -24,6 +24,7 @@
         <item name="android:alpha">0.5</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?android:attr/textColorTertiary</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
     <style name="Theme.CryptoChallenge.PrimaryTextAppearance">
