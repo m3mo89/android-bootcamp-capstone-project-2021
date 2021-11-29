@@ -18,7 +18,9 @@ import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
 import com.wizeline.bootcamp.capstone.domain.TickerDTO
 import com.wizeline.bootcamp.capstone.utils.Constants
 import com.wizeline.bootcamp.capstone.utils.getCryptoName
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BookDetailsFragment : Fragment() {
 
     companion object {
@@ -29,30 +31,7 @@ class BookDetailsFragment : Fragment() {
     private lateinit var askListAdapter: AskListAdapter
     private lateinit var bidListAdapter: BidListAdapter
 
-    private val retrofitClient = NetworkingModule.provideRetrofitClient()
-    private val tickerService =
-        NetworkingModule.provideTickerService(retrofitClient)
-    private val database = NetworkingModule.provideDatabase(NetworkingModule.application)
-    private val tickerDAO = NetworkingModule.provideTickerDao(database)
-    private val tickerRemoteDataSource =
-        NetworkingModule.provideTickerRemoteDataSource(tickerService)
-    private val tickerRepo =
-        NetworkingModule.provideTickerRepository(tickerRemoteDataSource, tickerDAO)
-
-    private val orderBookService = NetworkingModule.provideOrderBookService(retrofitClient)
-    private val orderBookDAO = NetworkingModule.provideOrderBookDao(database)
-    private val orderBookRemoteDataSource =
-        NetworkingModule.provideOrderBookRemoteDataSource(orderBookService)
-    private val orderBookRepo =
-        NetworkingModule.provideOrderBookRepository(orderBookRemoteDataSource, orderBookDAO)
-
-    private val viewModel: BookDetailsViewModel by viewModels {
-        BookDetailsViewModelFactory(
-            this,
-            tickerRepo,
-            orderBookRepo,
-        )
-    }
+    private val viewModel: BookDetailsViewModel by viewModels ()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
