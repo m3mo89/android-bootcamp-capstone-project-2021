@@ -32,15 +32,17 @@ import javax.inject.Singleton
 object NetworkingModule {
     @Provides
     @Singleton
-    fun provideRetrofitClient(): Retrofit {
+    fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(Constants.BITSO_API_BASE_URL)
-            .client(client())
+            .client(okHttpClient)
             .build()
     }
 
-    private fun client(): OkHttpClient {
+    @Provides
+    @Singleton
+    fun client(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
