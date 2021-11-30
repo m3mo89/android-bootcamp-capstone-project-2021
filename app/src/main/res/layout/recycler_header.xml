@@ -7,29 +7,23 @@
 
     <TextView
         android:id="@+id/ask_price_header"
+        style="@style/Theme.CryptoChallenge.HeaderTextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/price"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="@dimen/_12sp"
-        android:textStyle="bold" />
+        android:text="@string/price" />
 
     <TextView
         android:id="@+id/ask_amount_header"
+        style="@style/Theme.CryptoChallenge.HeaderTextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/amount"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="@dimen/_12sp"
-        android:textStyle="bold" />
+        android:text="@string/amount" />
 
     <TextView
         android:id="@+id/ask_total_header"
+        style="@style/Theme.CryptoChallenge.HeaderTextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8dp"
-        android:text="@string/total"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="@dimen/_12sp"
-        android:textStyle="bold" />
+        android:text="@string/total" />
 </LinearLayout>
