@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.CryptoChallenge.HeaderTextAppearance">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.CryptoChallenge.AccentTextAppearance.TitleTextAppearance">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="Theme.CryptoChallenge.TertiaryTextAppearance">
+        <item name="android:alpha">0.5</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?android:attr/textColorTertiary</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="Theme.CryptoChallenge.PrimaryTextAppearance">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.CryptoChallenge.AccentTextAppearance">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">?android:attr/colorAccent</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>
