@@ -6,7 +6,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.wizeline.bootcamp.capstone.databinding.ActivityMainBinding
-import com.wizeline.bootcamp.capstone.di.NetworkingModule
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

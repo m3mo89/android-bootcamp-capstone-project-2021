@@ -27,7 +27,7 @@ class BookListAdapter(
 
     class BookViewHolder(
         private val binding: ItemBookBinding,
-        private val onBookClicked: OnBookClicked,
+        private val onBookClicked: OnBookClicked
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(book: BookDTO) {
@@ -35,8 +35,7 @@ class BookListAdapter(
             binding.bookName.text = book.name.getCryptoName(binding.root.context)
             Glide.with(binding.root).load(book.spriteUrl).into(binding.bookSpriteUrl)
 
-            binding.root.setOnClickListener()
-            {
+            binding.root.setOnClickListener() {
                 onBookClicked.invoke(book.id)
             }
         }

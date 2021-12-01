@@ -125,9 +125,8 @@ val mockBooks = listOf(
         id = "aave_usd",
         name = "Aave to USD stablecoins",
         spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/aave"
-    ),
+    )
 )
-
 val mockTicker = TickerDTO(
     id = "eth_brl",
     cryptoName = "Ether",
@@ -138,7 +137,6 @@ val mockTicker = TickerDTO(
     bid = "25,333.08",
     spriteUrl = "https://cryptoicon-api.vercel.app/api/icon/eth"
 )
-
 val mockAsks = listOf(
     AskDTO(price = "0.07325251", amount = "0.00815501", total = "0.00815503"),
     AskDTO(price = "0.07325252", amount = "0.00815502", total = "0.00815503"),
@@ -147,9 +145,8 @@ val mockAsks = listOf(
     AskDTO(price = "0.07325251", amount = "0.00815501", total = "0.00815503"),
     AskDTO(price = "0.07325252", amount = "0.00815502", total = "0.00815503"),
     AskDTO(price = "0.07325253", amount = "0.00815503", total = "0.00815503"),
-    AskDTO(price = "0.07325254", amount = "0.00815504", total = "0.00815503"),
+    AskDTO(price = "0.07325254", amount = "0.00815504", total = "0.00815503")
 )
-
 val mockBids = listOf(
     BidDTO(price = "0.07325251", amount = "0.00815501", total = "0.00815503"),
     BidDTO(price = "0.07325252", amount = "0.00815502", total = "0.00815503"),
@@ -158,5 +155,5 @@ val mockBids = listOf(
     BidDTO(price = "0.07325251", amount = "0.00815501", total = "0.00815503"),
     BidDTO(price = "0.07325252", amount = "0.00815502", total = "0.00815503"),
     BidDTO(price = "0.07325253", amount = "0.00815503", total = "0.00815503"),
-    BidDTO(price = "0.07325254", amount = "0.00815504", total = "0.00815503"),
+    BidDTO(price = "0.07325254", amount = "0.00815504", total = "0.00815503")
 )

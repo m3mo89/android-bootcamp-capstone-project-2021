@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wizeline.bootcamp.capstone.R
 import com.wizeline.bootcamp.capstone.data.NetworkResult
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookListBinding
-import com.wizeline.bootcamp.capstone.di.NetworkingModule
 import com.wizeline.bootcamp.capstone.domain.BookDTO
 import com.wizeline.bootcamp.capstone.utils.Constants.Companion.ERROR_MESSAGE
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,10 +32,10 @@ class BookListFragment : Fragment() {
     private lateinit var navController: NavController
     private lateinit var bookListAdapter: BookListAdapter
 
-    private val viewModel: BookListViewModel by viewModels ()
-
+    private val viewModel: BookListViewModel by viewModels()
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return FragmentBookListBinding

@@ -22,7 +22,6 @@ class SplashScreenActivity : AppCompatActivity() {
             override fun onFinish() {
                 startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
             }
-
         }
 
         timer.start()

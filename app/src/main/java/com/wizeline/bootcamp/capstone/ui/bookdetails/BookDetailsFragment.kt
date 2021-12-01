@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.wizeline.bootcamp.capstone.R
 import com.wizeline.bootcamp.capstone.data.NetworkResult
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookDetailsBinding
-import com.wizeline.bootcamp.capstone.di.NetworkingModule
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
 import com.wizeline.bootcamp.capstone.domain.TickerDTO
 import com.wizeline.bootcamp.capstone.utils.Constants
@@ -31,10 +30,11 @@ class BookDetailsFragment : Fragment() {
     private lateinit var askListAdapter: AskListAdapter
     private lateinit var bidListAdapter: BidListAdapter
 
-    private val viewModel: BookDetailsViewModel by viewModels ()
+    private val viewModel: BookDetailsViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return FragmentBookDetailsBinding

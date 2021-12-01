@@ -21,7 +21,6 @@ fun <T, A> performGetOperation(
 
         if (responseStatus is NetworkResult.Success) {
             saveCallResult(responseStatus.data!!)
-
         } else if (responseStatus is NetworkResult.Error) {
             emit(NetworkResult.Error(responseStatus.message!!))
             emitSource(source)

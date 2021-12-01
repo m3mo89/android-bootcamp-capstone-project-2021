@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BookDetailsViewModel @Inject constructor(
     private val tickerRepo: TickerRepo,
-    private val orderBookRepo: OrderBookRepo,
+    private val orderBookRepo: OrderBookRepo
 ) : ViewModel() {
     private val _bookForTicker = MutableLiveData<String>()
     private val _bookForOrderBook = MutableLiveData<String>()

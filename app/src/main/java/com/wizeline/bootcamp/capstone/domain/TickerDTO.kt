@@ -8,5 +8,5 @@ data class TickerDTO(
     val highPrice: String,
     val lowPrice: String,
     val ask: String,
-    val bid: String,
+    val bid: String
 )

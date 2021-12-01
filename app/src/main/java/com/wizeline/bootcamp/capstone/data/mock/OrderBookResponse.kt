@@ -27,4 +27,3 @@ data class OrderBook(
     @SerializedName("updated_at") var updatedAt: String,
     var sequence: String
 )
-

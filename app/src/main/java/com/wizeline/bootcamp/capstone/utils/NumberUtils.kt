@@ -1,7 +1,7 @@
 package com.wizeline.bootcamp.capstone.utils
 
 import java.text.NumberFormat
-import java.util.*
+import java.util.Locale
 
 fun Double.asPrice(): String = NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
     maximumFractionDigits = if (this@asPrice > 1) {
