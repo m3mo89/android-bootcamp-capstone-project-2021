@@ -14,5 +14,5 @@ interface OrderBookDAO {
     suspend fun insert(entity: OrderBookEntity)
 
     @Query("SELECT * FROM ${TableNames.ORDERS} WHERE book=:book")
-    fun getOrderBookByBook(book: String): LiveData<OrderBookEntity>
+    suspend fun getOrderBookByBook(book: String): OrderBookEntity
 }

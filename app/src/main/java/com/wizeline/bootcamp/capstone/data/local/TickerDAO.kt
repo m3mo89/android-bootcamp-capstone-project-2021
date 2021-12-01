@@ -1,6 +1,5 @@
 package com.wizeline.bootcamp.capstone.data.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -11,7 +10,7 @@ import com.wizeline.bootcamp.capstone.utils.TableNames
 @Dao
 interface TickerDAO {
     @Query("SELECT * FROM ${TableNames.TICKER} WHERE book=:book")
-    fun getTickerByBook(book: String): LiveData<TickerEntity>
+    suspend fun getTickerByBook(book: String): TickerEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(ticker: TickerEntity)
