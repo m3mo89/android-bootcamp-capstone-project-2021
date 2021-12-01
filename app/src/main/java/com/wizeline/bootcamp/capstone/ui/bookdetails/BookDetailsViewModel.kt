@@ -13,8 +13,8 @@ import com.wizeline.bootcamp.capstone.data.mapper.OrderBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.mapper.TickerResponseMapper
 import com.wizeline.bootcamp.capstone.data.mapper.toDTO
 import com.wizeline.bootcamp.capstone.data.mapper.toLocal
-import com.wizeline.bootcamp.capstone.data.mock.OrderBookResponse
-import com.wizeline.bootcamp.capstone.data.mock.TickerResponse
+import com.wizeline.bootcamp.capstone.data.api.OrderBookResponse
+import com.wizeline.bootcamp.capstone.data.api.TickerResponse
 import com.wizeline.bootcamp.capstone.data.remote.OrderBookRemoteDataSource
 import com.wizeline.bootcamp.capstone.data.remote.TickerRemoteDataSource
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO

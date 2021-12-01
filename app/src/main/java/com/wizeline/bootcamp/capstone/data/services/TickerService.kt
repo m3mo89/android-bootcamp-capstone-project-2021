@@ -1,6 +1,6 @@
 package com.wizeline.bootcamp.capstone.data.services
 
-import com.wizeline.bootcamp.capstone.data.mock.TickerResponse
+import com.wizeline.bootcamp.capstone.data.api.TickerResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

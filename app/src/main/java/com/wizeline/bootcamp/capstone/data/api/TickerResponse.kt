@@ -1,4 +1,4 @@
-package com.wizeline.bootcamp.capstone.data.mock
+package com.wizeline.bootcamp.capstone.data.api
 
 import com.google.gson.annotations.SerializedName
 

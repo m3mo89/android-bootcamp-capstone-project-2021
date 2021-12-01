@@ -1,7 +1,7 @@
 package com.wizeline.bootcamp.capstone.data.mapper
 
 import com.wizeline.bootcamp.capstone.data.entities.BookEntity
-import com.wizeline.bootcamp.capstone.data.mock.AvailableBook
+import com.wizeline.bootcamp.capstone.data.api.AvailableBook
 import com.wizeline.bootcamp.capstone.domain.BookDTO
 import com.wizeline.bootcamp.capstone.utils.Constants
 import javax.inject.Inject

@@ -1,6 +1,6 @@
 package com.wizeline.bootcamp.capstone.data.services
 
-import com.wizeline.bootcamp.capstone.data.mock.AvailableBooksResponse
+import com.wizeline.bootcamp.capstone.data.api.AvailableBooksResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 

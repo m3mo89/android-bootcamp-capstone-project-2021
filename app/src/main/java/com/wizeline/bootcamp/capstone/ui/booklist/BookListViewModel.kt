@@ -10,7 +10,7 @@ import com.wizeline.bootcamp.capstone.data.local.BookDAO
 import com.wizeline.bootcamp.capstone.data.mapper.AvailableBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.mapper.toDTO
 import com.wizeline.bootcamp.capstone.data.mapper.toLocal
-import com.wizeline.bootcamp.capstone.data.mock.AvailableBooksResponse
+import com.wizeline.bootcamp.capstone.data.api.AvailableBooksResponse
 import com.wizeline.bootcamp.capstone.data.remote.BookRemoteDataSource
 import com.wizeline.bootcamp.capstone.domain.BookDTO
 import com.wizeline.bootcamp.capstone.utils.Constants.Companion.ERROR_MESSAGE
