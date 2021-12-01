@@ -19,8 +19,8 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class BookListViewModel @Inject constructor(
@@ -91,7 +91,6 @@ class BookListViewModel @Inject constructor(
             }
 
             override fun onComplete() {
-
             }
         }
     }

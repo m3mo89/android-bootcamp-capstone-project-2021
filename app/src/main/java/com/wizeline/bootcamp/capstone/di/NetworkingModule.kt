@@ -1,6 +1,5 @@
 package com.wizeline.bootcamp.capstone.di
 
-//import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
 import android.app.Application
 import com.wizeline.bootcamp.capstone.data.local.AppDatabase
 import com.wizeline.bootcamp.capstone.data.local.OrderBookDAO
@@ -20,12 +19,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
