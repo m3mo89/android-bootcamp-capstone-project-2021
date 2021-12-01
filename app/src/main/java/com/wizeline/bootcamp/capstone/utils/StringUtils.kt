@@ -21,7 +21,9 @@ val mapOfCoinNames = mapOf(
     "mxn" to "Pesos mexicanos",
     "usdt" to "Tether USD",
     "ars" to "Pesos argentinos",
-    "brl" to "Reales brasileños"
+    "brl" to "Reales brasileños",
+    "axs" to "Axie Infinity",
+    "chz" to "Chiliz"
 )
 
 fun String?.getCryptoName(context: Context): String {
@@ -32,7 +34,7 @@ fun String?.getCryptoName(context: Context): String {
     to = mapOfCoinNames.get(to).orEmpty()
 
     if (from.isNullOrEmpty() || to.isNullOrEmpty()) {
-        return ""
+        return context.resources.getString(R.string.error_name)
     }
 
     return context.resources.getString(R.string.to, from, to)
