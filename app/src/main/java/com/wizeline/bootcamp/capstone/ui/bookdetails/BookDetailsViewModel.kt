@@ -133,7 +133,7 @@ class BookDetailsViewModel @Inject constructor(
         }
     }
 
-    private fun handleOrderBookResponse(book:String): Observer<OrderBookResponse> {
+    private fun handleOrderBookResponse(book: String): Observer<OrderBookResponse> {
         return object : Observer<OrderBookResponse> {
             override fun onSubscribe(d: Disposable) {
                 _orderBook.postValue(NetworkResult.Loading())
