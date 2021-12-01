@@ -11,11 +11,13 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.wizeline.bootcamp.capstone.R
 import com.wizeline.bootcamp.capstone.data.NetworkResult
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookListBinding
 import com.wizeline.bootcamp.capstone.domain.BookDTO
 import com.wizeline.bootcamp.capstone.utils.Constants.Companion.ERROR_MESSAGE
+import com.wizeline.bootcamp.capstone.utils.checkForInternet
 import dagger.hilt.android.AndroidEntryPoint
 
 // view holders' height should take 1/7 of the screen
@@ -46,6 +48,7 @@ class BookListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initAdapter()
+        requestData(view)
         observeResult()
     }
 
@@ -66,6 +69,15 @@ class BookListFragment : Fragment() {
                 }
             }
             setHasFixedSize(true)
+        }
+    }
+
+    private fun requestData(view: View) {
+        if (checkForInternet(requireContext())) {
+            viewModel.requestRemoteData()
+        } else {
+            viewModel.requestLocalData()
+            Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_LONG).show()
         }
     }
 

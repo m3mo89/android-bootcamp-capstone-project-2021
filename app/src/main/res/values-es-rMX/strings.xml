@@ -10,4 +10,6 @@
     <string name="sell_orders">Posturas de Venta</string>
     <string name="to">%s a %s</string>
     <string name="error_message">Se produjo un error al obtener los datos</string>
+    <string name="error_internet_connection">No hay una conexión a internet disponible</string>
+    <string name="error_name">Nombre no disponible</string>
 </resources>

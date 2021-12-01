@@ -1,6 +1,6 @@
 package com.wizeline.bootcamp.capstone.data.mapper
 
-import com.wizeline.bootcamp.capstone.data.mock.Bids
+import com.wizeline.bootcamp.capstone.data.api.Bids
 import com.wizeline.bootcamp.capstone.domain.BidDTO
 import com.wizeline.bootcamp.capstone.utils.asPrice
 

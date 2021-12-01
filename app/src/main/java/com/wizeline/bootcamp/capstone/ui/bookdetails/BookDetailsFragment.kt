@@ -10,12 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.wizeline.bootcamp.capstone.R
 import com.wizeline.bootcamp.capstone.data.NetworkResult
 import com.wizeline.bootcamp.capstone.databinding.FragmentBookDetailsBinding
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
 import com.wizeline.bootcamp.capstone.domain.TickerDTO
 import com.wizeline.bootcamp.capstone.utils.Constants
+import com.wizeline.bootcamp.capstone.utils.checkForInternet
 import com.wizeline.bootcamp.capstone.utils.getCryptoName
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,7 +51,7 @@ class BookDetailsFragment : Fragment() {
 
         if (bookId != null) {
             initAdapters()
-            requestData(bookId)
+            requestData(bookId, view)
             observeTicker()
             observeOrderBook()
         }
@@ -80,8 +82,15 @@ class BookDetailsFragment : Fragment() {
         }
     }
 
-    private fun requestData(bookId: String) {
-        viewModel.requestData(bookId)
+    private fun requestData(bookId: String, view: View) {
+        if (checkForInternet(requireContext())) {
+            viewModel.requestTickerRemoteData(bookId)
+            viewModel.requestOrderBookRemoteData(bookId)
+        } else {
+            viewModel.requestTickerLocalData(bookId)
+            viewModel.requestOrderBookLocalData(bookId)
+            Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_LONG).show()
+        }
     }
 
     private fun observeTicker() {

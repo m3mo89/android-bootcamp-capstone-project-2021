@@ -1,6 +1,5 @@
 package com.wizeline.bootcamp.capstone.data.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -14,5 +13,5 @@ interface OrderBookDAO {
     suspend fun insert(entity: OrderBookEntity)
 
     @Query("SELECT * FROM ${TableNames.ORDERS} WHERE book=:book")
-    fun getOrderBookByBook(book: String): LiveData<OrderBookEntity>
+    suspend fun getOrderBookByBook(book: String): OrderBookEntity
 }

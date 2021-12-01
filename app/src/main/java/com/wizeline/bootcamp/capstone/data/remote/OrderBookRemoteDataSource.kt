@@ -7,8 +7,7 @@ import javax.inject.Singleton
 @Singleton
 class OrderBookRemoteDataSource @Inject constructor (
     private val orderBookService: OrderBookService
-) : BaseDataSource() {
-    suspend fun getOrderBookByBook(book: String) = getResult {
+) {
+    fun getOrderBookByBook(book: String) =
         orderBookService.getOrderBookByBook(book, true)
-    }
 }

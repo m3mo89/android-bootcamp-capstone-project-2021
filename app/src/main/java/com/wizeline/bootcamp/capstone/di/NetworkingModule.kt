@@ -2,15 +2,9 @@ package com.wizeline.bootcamp.capstone.di
 
 import android.app.Application
 import com.wizeline.bootcamp.capstone.data.local.AppDatabase
-import com.wizeline.bootcamp.capstone.data.local.BookDAO
-import com.wizeline.bootcamp.capstone.data.local.OrderBookDAO
-import com.wizeline.bootcamp.capstone.data.local.TickerDAO
 import com.wizeline.bootcamp.capstone.data.remote.BookRemoteDataSource
 import com.wizeline.bootcamp.capstone.data.remote.OrderBookRemoteDataSource
 import com.wizeline.bootcamp.capstone.data.remote.TickerRemoteDataSource
-import com.wizeline.bootcamp.capstone.data.repo.AvailableBooksRepo
-import com.wizeline.bootcamp.capstone.data.repo.OrderBookRepo
-import com.wizeline.bootcamp.capstone.data.repo.TickerRepo
 import com.wizeline.bootcamp.capstone.data.services.AvailableBooksService
 import com.wizeline.bootcamp.capstone.data.services.OrderBookService
 import com.wizeline.bootcamp.capstone.data.services.TickerService
@@ -25,6 +19,7 @@ import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
@@ -37,6 +32,7 @@ object NetworkingModule {
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(Constants.BITSO_API_BASE_URL)
             .client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
 
@@ -92,14 +88,6 @@ object NetworkingModule {
 
     @Provides
     @Singleton
-    fun provideAvailableBooksRepository(
-        remoteDataSource: BookRemoteDataSource,
-        localDataSource: BookDAO
-    ) =
-        AvailableBooksRepo(remoteDataSource, localDataSource)
-
-    @Provides
-    @Singleton
     fun provideTickerRemoteDataSource(tickerService: TickerService) =
         TickerRemoteDataSource(tickerService)
 
@@ -110,14 +98,6 @@ object NetworkingModule {
 
     @Provides
     @Singleton
-    fun provideTickerRepository(
-        remoteDataSource: TickerRemoteDataSource,
-        localDataSource: TickerDAO
-    ) =
-        TickerRepo(remoteDataSource, localDataSource)
-
-    @Provides
-    @Singleton
     fun provideOrderBookRemoteDataSource(orderBookService: OrderBookService) =
         OrderBookRemoteDataSource(orderBookService)
 
@@ -125,12 +105,4 @@ object NetworkingModule {
     @Singleton
     fun provideOrderBookDao(db: AppDatabase) =
         db.orderBookDao()
-
-    @Provides
-    @Singleton
-    fun provideOrderBookRepository(
-        remoteDataSource: OrderBookRemoteDataSource,
-        localDataSource: OrderBookDAO
-    ) =
-        OrderBookRepo(remoteDataSource, localDataSource)
 }

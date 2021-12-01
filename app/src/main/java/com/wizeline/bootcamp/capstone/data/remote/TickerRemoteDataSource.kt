@@ -7,8 +7,7 @@ import javax.inject.Singleton
 @Singleton
 class TickerRemoteDataSource @Inject constructor(
     private val tickerService: TickerService
-) : BaseDataSource() {
-    suspend fun getTickerByBook(book: String) = getResult {
+) {
+    fun getTickerByBook(book: String) =
         tickerService.getTickerByBook(book)
-    }
 }
