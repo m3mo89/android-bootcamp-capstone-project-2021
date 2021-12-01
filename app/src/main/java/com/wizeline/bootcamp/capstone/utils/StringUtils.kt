@@ -21,7 +21,7 @@ val mapOfCoinNames = mapOf(
     "mxn" to "Pesos mexicanos",
     "usdt" to "Tether USD",
     "ars" to "Pesos argentinos",
-    "brl" to "Reales brasileños",
+    "brl" to "Reales brasileños"
 )
 
 fun String?.getCryptoName(context: Context): String {

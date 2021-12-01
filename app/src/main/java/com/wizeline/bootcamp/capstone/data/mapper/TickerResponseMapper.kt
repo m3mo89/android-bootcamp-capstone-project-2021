@@ -28,5 +28,5 @@ fun TickerEntity.fromLocal() = TickerDTO(
     highPrice = high.let { high.asPrice() },
     lowPrice = low.let { low.asPrice() },
     ask = ask.let { ask.asPrice() },
-    bid = bid.let { bid.asPrice() },
+    bid = bid.let { bid.asPrice() }
 )
