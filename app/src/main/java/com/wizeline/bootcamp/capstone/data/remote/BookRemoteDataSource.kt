@@ -5,10 +5,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BookRemoteDataSource @Inject constructor (
+class BookRemoteDataSource @Inject constructor(
     private val availableBooksService: AvailableBooksService
-) : BaseDataSource() {
-    suspend fun getAvailableBooks() = getResult {
+) {
+    fun getAvailableBooks() =
         availableBooksService.getAvailableBooks()
-    }
 }
