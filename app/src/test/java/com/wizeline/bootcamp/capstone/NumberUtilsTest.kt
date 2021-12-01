@@ -15,6 +15,6 @@ class NumberUtilsTest {
         val numberAsPrice = number.asPrice()
 
         // Then
-        assertEquals("MX$2.00", numberAsPrice)
+        assertEquals("$2.00", numberAsPrice)
     }
 }
