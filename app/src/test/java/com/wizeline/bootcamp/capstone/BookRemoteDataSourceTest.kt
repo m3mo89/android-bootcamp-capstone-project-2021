@@ -28,7 +28,7 @@ class BookRemoteDataSourceTest {
             book = "eth_mxn", minimumAmount = ".003",
             maximumAmount = "1000.00", minimumPrice = "100.00",
             maximumPrice = "1000000.00", minimumValue = "25.00", maximumValue = "1000000.00"
-        ),
+        )
     )
 
     private val response = AvailableBooksResponse(success = true, payload = books)

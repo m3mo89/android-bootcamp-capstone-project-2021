@@ -1,7 +1,7 @@
 package com.wizeline.bootcamp.capstone.data.mapper
 
-import com.wizeline.bootcamp.capstone.data.entities.TickerEntity
 import com.wizeline.bootcamp.capstone.data.api.Ticker
+import com.wizeline.bootcamp.capstone.data.entities.TickerEntity
 import com.wizeline.bootcamp.capstone.domain.TickerDTO
 import com.wizeline.bootcamp.capstone.utils.Constants
 import com.wizeline.bootcamp.capstone.utils.asPrice
