@@ -39,11 +39,17 @@ class BookListViewModel @Inject constructor(
             try {
                 val booksEntities = localDataSource.getAll()
 
-                val booksDTO = availableBookResponseMapper.mapList(booksEntities)
+                if (booksEntities != null) {
+                    val booksDTO = availableBookResponseMapper.mapList(booksEntities)
 
-                val networkResult = NetworkResult.Success(booksDTO)
+                    val networkResult = NetworkResult.Success(booksDTO)
 
-                _result.postValue(networkResult)
+                    _result.postValue(networkResult)
+                } else {
+                    val emptyDTO = emptyList<BookDTO>()
+
+                    _result.postValue(NetworkResult.Success(emptyDTO))
+                }
             } catch (error: Exception) {
                 _result.postValue(NetworkResult.Error(error.message))
             }
