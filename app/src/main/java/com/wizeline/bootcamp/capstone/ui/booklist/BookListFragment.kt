@@ -1,5 +1,6 @@
 package com.wizeline.bootcamp.capstone.ui.booklist
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -77,8 +78,18 @@ class BookListFragment : Fragment() {
             viewModel.requestRemoteData()
         } else {
             viewModel.requestLocalData()
-            Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_LONG).show()
+            showSnackbar(view)
         }
+    }
+
+    private fun showSnackbar(view: View)
+    {
+        val noInternetConnectionSnackbar = Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_INDEFINITE)
+        noInternetConnectionSnackbar.setActionTextColor(Color.WHITE)
+        noInternetConnectionSnackbar.setAction(R.string.try_again) {
+            requestData(view)
+        }
+        noInternetConnectionSnackbar.show()
     }
 
     private fun observeResult() {
@@ -102,16 +113,17 @@ class BookListFragment : Fragment() {
     }
 
     private fun resultLoading() {
+        hideNoDataMessage()
         showLoadingIndicator()
     }
 
     private fun bindData(books: List<BookDTO>?) {
         if (books?.isEmpty() == true)
         {
-            binding.noDataMessage.visibility = View.VISIBLE
+            showNoDataMessage()
         }else
         {
-            binding.noDataMessage.visibility = View.GONE
+            hideNoDataMessage()
             bookListAdapter.submitList(books)
         }
     }
@@ -124,6 +136,16 @@ class BookListFragment : Fragment() {
         }
 
         Toast.makeText(requireContext(), messageToDisplay, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showNoDataMessage()
+    {
+        binding.noDataMessage.visibility = View.VISIBLE
+    }
+
+    private fun hideNoDataMessage()
+    {
+        binding.noDataMessage.visibility = View.GONE
     }
 
     private fun showLoadingIndicator() {
