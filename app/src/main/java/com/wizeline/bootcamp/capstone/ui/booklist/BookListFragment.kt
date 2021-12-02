@@ -118,14 +118,11 @@ class BookListFragment : Fragment() {
     }
 
     private fun bindData(books: List<BookDTO>?) {
-        if (books?.isEmpty() == true)
-        {
-            showNoDataMessage()
-        }else
-        {
-            hideNoDataMessage()
+        books?.let {
             bookListAdapter.submitList(books)
         }
+
+        showErrorNoDataMessage(books)
     }
 
     private fun showErrorMessage(message: String?) {
@@ -136,6 +133,13 @@ class BookListFragment : Fragment() {
         }
 
         Toast.makeText(requireContext(), messageToDisplay, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showErrorNoDataMessage(books: List<BookDTO>?) {
+        if (books == null || books?.isEmpty())
+            showNoDataMessage()
+        else
+            hideNoDataMessage()
     }
 
     private fun showNoDataMessage()
