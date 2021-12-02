@@ -105,6 +105,7 @@ class BookListFragment : Fragment() {
     private fun resultSuccess(books: List<BookDTO>?) {
         hideLoadingIndicator()
         bindData(books)
+        showErrorNoDataMessage(books)
     }
 
     private fun resultError(message: String?) {
@@ -121,8 +122,6 @@ class BookListFragment : Fragment() {
         books?.let {
             bookListAdapter.submitList(books)
         }
-
-        showErrorNoDataMessage(books)
     }
 
     private fun showErrorMessage(message: String?) {
