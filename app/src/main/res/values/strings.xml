@@ -12,4 +12,5 @@
     <string name="error_internet_connection">No internet connection available</string>
     <string name="error_name">Name not available</string>
     <string name="error_no_data">No data available</string>
+    <string name="try_again">Try again</string>
 </resources>
