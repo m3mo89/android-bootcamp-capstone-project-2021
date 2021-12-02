@@ -1,5 +1,6 @@
 package com.wizeline.bootcamp.capstone.ui.bookdetails
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,8 @@ class BookDetailsFragment : Fragment() {
     private lateinit var bidListAdapter: BidListAdapter
 
     private val viewModel: BookDetailsViewModel by viewModels()
+    private var _ticker: TickerDTO? = null
+    private var _orderBook: OrderBookDTO? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -89,8 +92,19 @@ class BookDetailsFragment : Fragment() {
         } else {
             viewModel.requestTickerLocalData(bookId)
             viewModel.requestOrderBookLocalData(bookId)
-            Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_LONG).show()
+
+            showSnackBar(bookId, view)
         }
+    }
+
+    private fun showSnackBar(bookId: String, view: View)
+    {
+        val noInternetConnectionSnackBar = Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_INDEFINITE)
+        noInternetConnectionSnackBar.setActionTextColor(Color.WHITE)
+        noInternetConnectionSnackBar.setAction(R.string.try_again) {
+            requestData(bookId, view)
+        }
+        noInternetConnectionSnackBar.show()
     }
 
     private fun observeTicker() {
@@ -114,13 +128,17 @@ class BookDetailsFragment : Fragment() {
     }
 
     private fun tickerResultSuccess(ticker: TickerDTO?) {
+        _ticker = ticker
         hideLoadingIndicator()
         bindTickerData(ticker)
+        showErrorNoDataMessage()
     }
 
     private fun orderBookResultSuccess(orderBook: OrderBookDTO?) {
+        _orderBook = orderBook
         hideLoadingIndicator()
         bindOrderBookData(orderBook)
+        showErrorNoDataMessage()
     }
 
     private fun resultError(message: String?) {
@@ -129,6 +147,7 @@ class BookDetailsFragment : Fragment() {
     }
 
     private fun resultLoading() {
+        hideNoDataMessage()
         showLoadingIndicator()
     }
 
@@ -152,6 +171,13 @@ class BookDetailsFragment : Fragment() {
         }
     }
 
+    private fun showErrorNoDataMessage() {
+        if (_ticker?.id?.isEmpty() == true || (_orderBook?.asks?.isEmpty() == true && _orderBook?.bids?.isEmpty() == true))
+            showNoDataMessage()
+        else
+            hideNoDataMessage()
+    }
+
     private fun showErrorMessage(message: String?) {
         var messageToDisplay = message.orEmpty()
 
@@ -160,6 +186,48 @@ class BookDetailsFragment : Fragment() {
         }
 
         Toast.makeText(requireContext(), messageToDisplay, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showNoDataMessage()
+    {
+        binding.noDataDetailMessage.visibility = View.VISIBLE
+        binding.cryptoName.visibility = View.GONE
+        binding.bookSpriteUrl.visibility = View.GONE
+        binding.book.visibility = View.GONE
+        binding.bookPrice.visibility = View.GONE
+        binding.dayHighLow.visibility = View.GONE
+        binding.askPriceLabel.visibility = View.GONE
+        binding.askPriceValue.visibility = View.GONE
+        binding.separator.visibility = View.GONE
+        binding.bidPriceLabel.visibility = View.GONE
+        binding.bidPriceValue.visibility = View.GONE
+        binding.buyOrders.visibility = View.GONE
+        binding.sellOrders.visibility = View.GONE
+        binding.askDetailsList.visibility = View.GONE
+        binding.askDetailsListHeader.root.visibility = View.GONE
+        binding.bidDetailsList.visibility = View.GONE
+        binding.bidDetailsListHeader.root.visibility = View.GONE
+    }
+
+    private fun hideNoDataMessage()
+    {
+        binding.noDataDetailMessage.visibility = View.GONE
+        binding.cryptoName.visibility = View.VISIBLE
+        binding.bookSpriteUrl.visibility = View.VISIBLE
+        binding.book.visibility = View.VISIBLE
+        binding.bookPrice.visibility = View.VISIBLE
+        binding.dayHighLow.visibility = View.VISIBLE
+        binding.askPriceLabel.visibility = View.VISIBLE
+        binding.askPriceValue.visibility = View.VISIBLE
+        binding.separator.visibility = View.VISIBLE
+        binding.bidPriceLabel.visibility = View.VISIBLE
+        binding.bidPriceValue.visibility = View.VISIBLE
+        binding.buyOrders.visibility = View.VISIBLE
+        binding.sellOrders.visibility = View.VISIBLE
+        binding.askDetailsList.visibility = View.VISIBLE
+        binding.askDetailsListHeader.root.visibility = View.VISIBLE
+        binding.bidDetailsList.visibility = View.VISIBLE
+        binding.bidDetailsListHeader.root.visibility = View.VISIBLE
     }
 
     private fun showLoadingIndicator() {
