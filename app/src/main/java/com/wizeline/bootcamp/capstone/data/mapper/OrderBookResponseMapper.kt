@@ -1,7 +1,7 @@
 package com.wizeline.bootcamp.capstone.data.mapper
 
-import com.wizeline.bootcamp.capstone.data.entities.OrderBookEntity
 import com.wizeline.bootcamp.capstone.data.api.OrderBook
+import com.wizeline.bootcamp.capstone.data.entities.OrderBookEntity
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
 import javax.inject.Inject
 import javax.inject.Singleton

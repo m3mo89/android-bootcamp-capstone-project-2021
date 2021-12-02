@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wizeline.bootcamp.capstone.data.NetworkResult
+import com.wizeline.bootcamp.capstone.data.api.OrderBookResponse
+import com.wizeline.bootcamp.capstone.data.api.TickerResponse
 import com.wizeline.bootcamp.capstone.data.entities.OrderBookEntity
 import com.wizeline.bootcamp.capstone.data.entities.TickerEntity
 import com.wizeline.bootcamp.capstone.data.local.OrderBookDAO
@@ -13,8 +15,6 @@ import com.wizeline.bootcamp.capstone.data.mapper.OrderBookResponseMapper
 import com.wizeline.bootcamp.capstone.data.mapper.TickerResponseMapper
 import com.wizeline.bootcamp.capstone.data.mapper.toDTO
 import com.wizeline.bootcamp.capstone.data.mapper.toLocal
-import com.wizeline.bootcamp.capstone.data.api.OrderBookResponse
-import com.wizeline.bootcamp.capstone.data.api.TickerResponse
 import com.wizeline.bootcamp.capstone.data.remote.OrderBookRemoteDataSource
 import com.wizeline.bootcamp.capstone.data.remote.TickerRemoteDataSource
 import com.wizeline.bootcamp.capstone.domain.OrderBookDTO
