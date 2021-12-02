@@ -78,18 +78,18 @@ class BookListFragment : Fragment() {
             viewModel.requestRemoteData()
         } else {
             viewModel.requestLocalData()
-            showSnackbar(view)
+            showSnackBar(view)
         }
     }
 
-    private fun showSnackbar(view: View)
+    private fun showSnackBar(view: View)
     {
-        val noInternetConnectionSnackbar = Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_INDEFINITE)
-        noInternetConnectionSnackbar.setActionTextColor(Color.WHITE)
-        noInternetConnectionSnackbar.setAction(R.string.try_again) {
+        val noInternetConnectionSnackBar = Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_INDEFINITE)
+        noInternetConnectionSnackBar.setActionTextColor(Color.WHITE)
+        noInternetConnectionSnackBar.setAction(R.string.try_again) {
             requestData(view)
         }
-        noInternetConnectionSnackbar.show()
+        noInternetConnectionSnackBar.show()
     }
 
     private fun observeResult() {
