@@ -82,8 +82,7 @@ class BookListFragment : Fragment() {
         }
     }
 
-    private fun showSnackBar(view: View)
-    {
+    private fun showSnackBar(view: View) {
         val noInternetConnectionSnackBar = Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_INDEFINITE)
         noInternetConnectionSnackBar.setActionTextColor(Color.WHITE)
         noInternetConnectionSnackBar.setAction(R.string.try_again) {
@@ -141,13 +140,11 @@ class BookListFragment : Fragment() {
             hideNoDataMessage()
     }
 
-    private fun showNoDataMessage()
-    {
+    private fun showNoDataMessage() {
         binding.noDataMessage.visibility = View.VISIBLE
     }
 
-    private fun hideNoDataMessage()
-    {
+    private fun hideNoDataMessage() {
         binding.noDataMessage.visibility = View.GONE
     }
 

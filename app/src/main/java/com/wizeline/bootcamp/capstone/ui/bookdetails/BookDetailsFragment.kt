@@ -97,8 +97,7 @@ class BookDetailsFragment : Fragment() {
         }
     }
 
-    private fun showSnackBar(bookId: String, view: View)
-    {
+    private fun showSnackBar(bookId: String, view: View) {
         val noInternetConnectionSnackBar = Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_INDEFINITE)
         noInternetConnectionSnackBar.setActionTextColor(Color.WHITE)
         noInternetConnectionSnackBar.setAction(R.string.try_again) {
@@ -188,8 +187,7 @@ class BookDetailsFragment : Fragment() {
         Toast.makeText(requireContext(), messageToDisplay, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showNoDataMessage()
-    {
+    private fun showNoDataMessage() {
         binding.noDataDetailMessage.visibility = View.VISIBLE
         binding.cryptoName.visibility = View.GONE
         binding.bookSpriteUrl.visibility = View.GONE
@@ -209,8 +207,7 @@ class BookDetailsFragment : Fragment() {
         binding.bidDetailsListHeader.root.visibility = View.GONE
     }
 
-    private fun hideNoDataMessage()
-    {
+    private fun hideNoDataMessage() {
         binding.noDataDetailMessage.visibility = View.GONE
         binding.cryptoName.visibility = View.VISIBLE
         binding.bookSpriteUrl.visibility = View.VISIBLE

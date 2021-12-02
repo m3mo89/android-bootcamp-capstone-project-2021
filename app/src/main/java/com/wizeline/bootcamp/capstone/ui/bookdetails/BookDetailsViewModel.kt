@@ -52,8 +52,7 @@ class BookDetailsViewModel @Inject constructor(
             try {
                 val tickerEntity = tickerLocalDataSource.getTickerByBook(book)
 
-                if (tickerEntity != null)
-                {
+                if (tickerEntity != null) {
                     val tickersDTO = tickerMapper.map(tickerEntity)
 
                     val networkResult = NetworkResult.Success(tickersDTO)
