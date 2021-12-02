@@ -106,7 +106,14 @@ class BookListFragment : Fragment() {
     }
 
     private fun bindData(books: List<BookDTO>?) {
-        bookListAdapter.submitList(books)
+        if (books?.isEmpty() == true)
+        {
+            binding.noDataMessage.visibility = View.VISIBLE
+        }else
+        {
+            binding.noDataMessage.visibility = View.GONE
+            bookListAdapter.submitList(books)
+        }
     }
 
     private fun showErrorMessage(message: String?) {
