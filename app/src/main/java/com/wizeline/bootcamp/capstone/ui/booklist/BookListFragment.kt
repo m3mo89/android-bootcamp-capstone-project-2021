@@ -1,5 +1,6 @@
 package com.wizeline.bootcamp.capstone.ui.booklist
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -77,8 +78,17 @@ class BookListFragment : Fragment() {
             viewModel.requestRemoteData()
         } else {
             viewModel.requestLocalData()
-            Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_LONG).show()
+            showSnackBar(view)
         }
+    }
+
+    private fun showSnackBar(view: View) {
+        val noInternetConnectionSnackBar = Snackbar.make(view, R.string.error_internet_connection, Snackbar.LENGTH_INDEFINITE)
+        noInternetConnectionSnackBar.setActionTextColor(Color.WHITE)
+        noInternetConnectionSnackBar.setAction(R.string.try_again) {
+            requestData(view)
+        }
+        noInternetConnectionSnackBar.show()
     }
 
     private fun observeResult() {
@@ -94,6 +104,7 @@ class BookListFragment : Fragment() {
     private fun resultSuccess(books: List<BookDTO>?) {
         hideLoadingIndicator()
         bindData(books)
+        showErrorNoDataMessage(books)
     }
 
     private fun resultError(message: String?) {
@@ -102,11 +113,14 @@ class BookListFragment : Fragment() {
     }
 
     private fun resultLoading() {
+        hideNoDataMessage()
         showLoadingIndicator()
     }
 
     private fun bindData(books: List<BookDTO>?) {
-        bookListAdapter.submitList(books)
+        books?.let {
+            bookListAdapter.submitList(books)
+        }
     }
 
     private fun showErrorMessage(message: String?) {
@@ -117,6 +131,21 @@ class BookListFragment : Fragment() {
         }
 
         Toast.makeText(requireContext(), messageToDisplay, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showErrorNoDataMessage(books: List<BookDTO>?) {
+        if (books == null || books?.isEmpty())
+            showNoDataMessage()
+        else
+            hideNoDataMessage()
+    }
+
+    private fun showNoDataMessage() {
+        binding.noDataMessage.visibility = View.VISIBLE
+    }
+
+    private fun hideNoDataMessage() {
+        binding.noDataMessage.visibility = View.GONE
     }
 
     private fun showLoadingIndicator() {

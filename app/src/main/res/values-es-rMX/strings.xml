@@ -12,4 +12,6 @@
     <string name="error_message">Se produjo un error al obtener los datos</string>
     <string name="error_internet_connection">No hay una conexión a internet disponible</string>
     <string name="error_name">Nombre no disponible</string>
+    <string name="error_no_data">No hay datos disponibles</string>
+    <string name="try_again">Reintentar</string>
 </resources>

@@ -52,11 +52,25 @@ class BookDetailsViewModel @Inject constructor(
             try {
                 val tickerEntity = tickerLocalDataSource.getTickerByBook(book)
 
-                val tickersDTO = tickerMapper.map(tickerEntity)
+                if (tickerEntity != null) {
+                    val tickersDTO = tickerMapper.map(tickerEntity)
 
-                val networkResult = NetworkResult.Success(tickersDTO)
+                    val networkResult = NetworkResult.Success(tickersDTO)
 
-                _ticker.postValue(networkResult)
+                    _ticker.postValue(networkResult)
+                } else {
+                    val emptyDTO = TickerDTO(
+                        id = "",
+                        spriteUrl = "",
+                        cryptoName = "",
+                        lastPrice = "",
+                        highPrice = "",
+                        lowPrice = "",
+                        ask = "",
+                        bid = "")
+
+                    _ticker.postValue(NetworkResult.Success(emptyDTO))
+                }
             } catch (error: Exception) {
                 _ticker.postValue(NetworkResult.Error(error.message))
             }
@@ -70,11 +84,17 @@ class BookDetailsViewModel @Inject constructor(
             try {
                 val orderBookEntity = orderBookLocalDataSource.getOrderBookByBook(book)
 
-                val orderBooksDTO = orderbookMapper.map(orderBookEntity)
+                if (orderBookEntity != null) {
+                    val orderBooksDTO = orderbookMapper.map(orderBookEntity)
 
-                val networkResult = NetworkResult.Success(orderBooksDTO)
+                    val networkResult = NetworkResult.Success(orderBooksDTO)
 
-                _orderBook.postValue(networkResult)
+                    _orderBook.postValue(networkResult)
+                } else {
+                    val emptyDTO = OrderBookDTO(emptyList(), emptyList())
+
+                    _orderBook.postValue(NetworkResult.Success(emptyDTO))
+                }
             } catch (error: Exception) {
                 _orderBook.postValue(NetworkResult.Error(error.message))
             }
